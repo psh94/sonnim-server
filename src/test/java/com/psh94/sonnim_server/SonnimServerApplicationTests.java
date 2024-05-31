@@ -8,6 +8,7 @@ class SonnimServerApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
