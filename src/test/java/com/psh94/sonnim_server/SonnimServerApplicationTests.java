@@ -8,7 +8,6 @@ class SonnimServerApplicationTests {
 
 	@Test
 	void contextLoads() {
-		throw new RuntimeException("Fail!!!!!!!!!!");
 	}
 
 }
