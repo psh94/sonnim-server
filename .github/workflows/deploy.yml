@@ -53,19 +53,10 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
           script_stop: true
           script: |
-            echo "Stopping existing container..."
-            docker stop sonnim-server || true
-            echo "Removing existing container..."
-            docker rm sonnim-server || true
-            echo "Logging into ECR..."
-            $(aws ecr get-login --no-include-email --region ap-northeast-2)
-            echo "Pulling Docker image..."
-            docker pull ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
-            if [ $? -ne 0 ]; then
-            echo "Docker pull failed"
-            exit 1
-            fi
-            echo "Running new container..."
-            docker run -d --name sonnim-server -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
+            docker stop instagram-server || true
+            docker rm instagram-server || true
+            docker pull ${{ steps.login-ecr.outputs.registry }}/instagram-server:latest
+            docker run -d --name instagram-server -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/instagram-server:latest
