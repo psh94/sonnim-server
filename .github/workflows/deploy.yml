@@ -61,5 +61,5 @@ jobs:
             docker rm sonnim-server || true
             echo "Pulling new image..."
             docker pull ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
-            echo "Running new container..."
-            docker run -d --name sonnim-server -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
+#            echo "Running new container..."
+#            docker run -d --name sonnim-server -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
