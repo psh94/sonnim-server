@@ -28,3 +28,4 @@
 </br>
 
 <h3>4) ERD</h3>
+![erd](https://github.com/psh94/sonnim-server/assets/84213252/226d35e1-11f1-4623-8f62-8b72d09648be)
