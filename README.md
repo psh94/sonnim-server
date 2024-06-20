@@ -44,12 +44,16 @@
 
 ## API
 
-| 메서드 | 엔드포인트  | 설명         | 요청 파라미터 | 응답                          | 
-|--------|-----------|---------------------|--------------------|-----------------------------------|
-| GET    | /members  |멤버 조회 |  None | 200 OK - Member Information (JSON)     |
-| POST    | /members/join  |                     |  None               | 200 OK - List of users (JSON)     |
-| GET    | /members  |                     |  None               | 200 OK - List of users (JSON)     |
-| GET    | /members  |                     |  None               | 200 OK - List of users (JSON)     |
-| GET    | /members  |                     |  None               | 200 OK - List of users (JSON)     |
-| GET    | /members  |                     |  None               | 200 OK - List of users (JSON)     |
-| GET    | /members  |                     |  None               | 200 OK - List of users (JSON)     |
+**MEMBER**
+
+| 메서드 | 엔드포인트  | 설명         |
+|--------|-----------|---------------------|
+| GET    | /members/{id}  | 회원 조회     |
+| POST    | /members/join  | 회원 등록     |
+| DELETE    | /members/{id}  | 회원 삭제     |
+
+**RESERVATION**
+
+| 메서드 | 엔드포인트  | 설명         |
+|--------|-----------|---------------------|
+| GET    | /members/{id}  | 회원 조회     |
