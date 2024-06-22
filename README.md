@@ -47,28 +47,40 @@
 **MEMBER**
 
 | 메서드 | 엔드포인트  | 설명         |
-|--------|-----------|---------------------|
-| GET    | /members/{id}  | 회원 조회     |
-| POST    | /members/join  | 회원 등록     |
-| DELETE    | /members/{id}  | 회원 삭제     |
+|---------|-----------|---------------------|
+| GET     | /members/me  | 회원정보 조회        |
+| POST    | /members/join| 회원 등록           |
+| DELETE  | /members     | 회원 삭제           |
+| POST    | /auth/login  | 로그인             |
+| POST    | /auth/logout | 로그아웃            |
+
 
 **RESERVATION**
 
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
-| GET    | /members/{id}  | 회원 조회     |
+| GET    | /reservations/{id}  | 예약 조회     |
+| POST   | /reservations       | 예약 생성     |
+| POST   | /reservations/{id}  | 예약 취소     |
+| DELETE | /reservations/{id}  | 예약 삭제     |
 
 **GUESTHOUSE**
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
-| GET    | /members/{id}  | 회원 조회     |
+| GET    | /guesthouses/{id}  | 게스트하우스 조회     |
+| POST   | /guesthouses       | 게스트하우스 생성     |
+| DELETE | /guesthouses/{id}  | 게스트하우스 삭제     |
 
 **ROOM**
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
-| GET    | /members/{id}  | 회원 조회     |
+| GET    | /rooms/{id}  | 방 정보 조회     |
+| POST   | /rooms       | 방 정보 생성     |
+| DELETE | /rooms/{id}  | 방 정보 삭제     |
 
 **ROOMINVENTORY**
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
-| GET    | /members/{id}  | 회원 조회     |
+| GET    | /roomsInventories/{id}  | 방 조회     |
+| POST   | /roomsInventories       | 방 생성     |
+| DELETE | /roomsInventories/{id}  | 방 삭제     |
