@@ -7,6 +7,6 @@ import com.psh94.sonnim_server.domain.member.dto.SignUpRequest;
 public interface MemberService {
 
     MemberDTO createMember(SignUpRequest signUpRequest);
-    MemberDTO getMemberById(Long memberId);
+    MemberDTO findMemberByAuth();
     void deleteMember(DeleteMemberRequest deleteMemberRequest);
 }

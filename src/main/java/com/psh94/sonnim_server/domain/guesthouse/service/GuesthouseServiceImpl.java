@@ -9,6 +9,7 @@ import com.psh94.sonnim_server.domain.guesthouse.entity.Guesthouse;
 import com.psh94.sonnim_server.domain.guesthouse.repository.GuesthouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     private final GuesthouseRepository guesthouseRepository;
 
     @Override
+    @Transactional
     @CheckRole({"GUESTHOUSE","ADMIN"})
     public GuesthouseDTO enrollGuesthouse(GuesthouseEnrollRequest guesthouseEnrollRequest) {
         Guesthouse guesthouseEntity = GuesthouseConverter.toEntity(guesthouseEnrollRequest);
@@ -25,6 +27,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public GuesthouseDTO getGuesthouse(Long id) {
         Guesthouse foundGuesthouse  = guesthouseRepository.findById(id)
                 .orElseThrow(()-> new GuesthouseNotFoundException("게스트하우스를 찾을 수 없습니다."));
@@ -32,6 +35,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     }
 
     @Override
+    @Transactional
     @CheckRole({"GUESTHOUSE","ADMIN"})
     public void deleteGuesthouse(Long id) {
         if(!guesthouseRepository.existsById(id)) {

@@ -26,10 +26,9 @@ public class MemberController {
         return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findMemberById(@PathVariable Long id) {
-        log.info("id: {}", id);
-        MemberDTO memberDTO = memberService.getMemberById(id);
+    @GetMapping("/me")
+    public ResponseEntity<?> findMemberById() {
+        MemberDTO memberDTO = memberService.findMemberByAuth();
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 

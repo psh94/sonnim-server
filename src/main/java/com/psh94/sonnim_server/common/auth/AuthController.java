@@ -30,7 +30,6 @@ public class AuthController {
     @PostMapping("/login")
     public Map<String, String> login(@Valid @RequestBody LoginForm loginForm) {
         try {
-
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword())
             );
@@ -40,8 +39,10 @@ public class AuthController {
             String accessToken = jwtUtil.generateAccessToken(userId);
             String refreshToken = jwtUtil.generateRefreshToken(userId);
 
-            refreshTokenRepository.deleteByUserId(userId);
-            refreshTokenRepository.save(new RefreshToken(userId, refreshToken));
+            refreshTokenRepository.save(RefreshToken.builder()
+                    .userId(userId)
+                    .token(refreshToken)
+                    .build());
 
             Map<String, String> response = new HashMap<>();
             response.put("accessToken", accessToken);
@@ -55,14 +56,42 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public Map<String, String> refresh(@RequestBody Map<String, String> tokenRequest) {
-        String refreshToken = tokenRequest.get("refreshToken");
+        String refreshTokenFromRequest = tokenRequest.get("refreshToken");
 
-        if (jwtUtil.validateToken(refreshToken)) {
-            Long userId = jwtUtil.getUserIdFromToken(refreshToken);
+        // Redis에서 리프레시 토큰 조회
+        RefreshToken storedToken = refreshTokenRepository.findByToken(refreshTokenFromRequest);
+        System.out.println("storedToken = " + storedToken);
+
+        if (storedToken != null && jwtUtil.validateToken(storedToken.getToken())) {
+            Long userId = jwtUtil.getUserIdFromToken(storedToken.getToken());
             String newAccessToken = jwtUtil.generateAccessToken(userId);
+            String newRefreshToken = jwtUtil.generateRefreshToken(userId);
+
+            refreshTokenRepository.save(RefreshToken.builder()
+                    .userId(userId)
+                    .token(newRefreshToken)
+                    .build());
 
             Map<String, String> response = new HashMap<>();
             response.put("accessToken", newAccessToken);
+            response.put("refreshToken", newRefreshToken);
+            return response;
+        } else {
+            throw new RuntimeException("Invalid refresh token");
+        }
+    }
+
+    @PostMapping("/logout")
+    public Map<String, String> logout(@RequestBody Map<String, String> tokenRequest) {
+        String refreshTokenFromRequest = tokenRequest.get("refreshToken");
+
+        RefreshToken storedToken = refreshTokenRepository.findByToken(refreshTokenFromRequest);
+
+        if (storedToken != null && jwtUtil.validateToken(storedToken.getToken())) {
+            refreshTokenRepository.deleteByUserId(storedToken.getUserId());
+
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Logged out successfully");
             return response;
         } else {
             throw new RuntimeException("Invalid refresh token");

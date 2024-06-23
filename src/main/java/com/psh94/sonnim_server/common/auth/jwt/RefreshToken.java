@@ -1,21 +1,25 @@
 package com.psh94.sonnim_server.common.auth.jwt;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.util.UUID;
 
-@Entity
+
 @Getter
-@RedisHash("refreshToken")
 @NoArgsConstructor
+@RedisHash("RefreshToken")
 public class RefreshToken {
 
     @Id
     private String id;
+
+    @Indexed
     private Long userId;
+
+    @Indexed
     private String token;
 
     @Builder
