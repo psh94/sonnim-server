@@ -16,7 +16,7 @@
 - REDIS
 - DOCKER
 - GITHUB ACTIONS
-- 
+
 ## 서버 아키텍쳐
 ![diagram2](https://github.com/psh94/sonnim-server/assets/84213252/b2a4d60d-367d-43fa-98fb-865765c5e3ea)
 
@@ -64,7 +64,9 @@
 | POST   | /reservations/{id}  | 예약 취소     |
 | DELETE | /reservations/{id}  | 예약 삭제     |
 
+
 **GUESTHOUSE**
+
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /guesthouses/{id}  | 게스트하우스 조회     |
@@ -72,6 +74,7 @@
 | DELETE | /guesthouses/{id}  | 게스트하우스 삭제     |
 
 **ROOM**
+
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /rooms/{id}  | 방 정보 조회     |
@@ -79,6 +82,7 @@
 | DELETE | /rooms/{id}  | 방 정보 삭제     |
 
 **ROOMINVENTORY**
+
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /roomsInventories/{id}  | 방 조회     |
