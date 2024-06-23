@@ -55,7 +55,12 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
           script: |
+            echo "ssh connected"
             docker stop sonnim-server || true
+            echo "docker stop"
             docker rm sonnim-server || true
+            echo "docker rm"
             docker pull ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
+            echo "docker pull"
             docker run -d --name sonnim-server -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/sonnim-server:latest
+            echo "docker run"
