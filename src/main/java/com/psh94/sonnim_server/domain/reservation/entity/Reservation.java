@@ -29,7 +29,7 @@ public class Reservation extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ReservationRoomInventory> roomInventories = new HashSet<>();
 
     @Builder

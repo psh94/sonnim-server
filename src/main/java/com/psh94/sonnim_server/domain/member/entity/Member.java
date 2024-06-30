@@ -52,7 +52,7 @@ public class Member extends BaseTimeEntity {
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
 
 }

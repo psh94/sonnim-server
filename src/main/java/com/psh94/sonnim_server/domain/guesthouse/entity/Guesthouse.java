@@ -36,7 +36,7 @@ public class Guesthouse extends BaseTimeEntity {
 
     private String description;
 
-    @OneToMany(mappedBy = "guesthouse", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "guesthouse", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms = new ArrayList<>();
 
     @Builder

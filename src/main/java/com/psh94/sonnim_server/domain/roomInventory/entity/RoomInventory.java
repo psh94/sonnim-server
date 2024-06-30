@@ -35,7 +35,7 @@ public class RoomInventory extends BaseTimeEntity {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @OneToMany(mappedBy = "roomInventory")
+    @OneToMany(mappedBy = "roomInventory", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ReservationRoomInventory> reservations = new HashSet<>();
 
     @Builder
