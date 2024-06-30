@@ -6,7 +6,7 @@ import com.psh94.sonnim_server.domain.member.dto.SignUpRequest;
 
 public interface MemberService {
 
-    MemberDTO createMember(SignUpRequest signUpRequest);
-    MemberDTO findMemberByAuth();
-    void deleteMember(DeleteMemberRequest deleteMemberRequest);
+    MemberDTO createMember(SignUpRequest signUpRequest);        // 회원 생성
+    MemberDTO findMemberByAuth();                               // 회원조회
+    void deleteMember(DeleteMemberRequest deleteMemberRequest); // 회원삭제
 }

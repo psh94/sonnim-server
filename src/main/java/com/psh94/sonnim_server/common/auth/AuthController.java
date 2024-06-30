@@ -31,7 +31,7 @@ public class AuthController {
     public Map<String, String> login(@Valid @RequestBody LoginForm loginForm) {
         try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword())
+                    new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()) // 인증 요청
             );
 
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();

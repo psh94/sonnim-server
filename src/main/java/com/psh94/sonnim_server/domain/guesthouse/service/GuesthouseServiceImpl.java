@@ -19,7 +19,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
+    @CheckRole({"GUESTHOUSE","ADMIN"})  // GUESTHOUSE, ADMIN 권한을 가진 사용자만 접근 가능
     public GuesthouseDTO enrollGuesthouse(GuesthouseEnrollRequest guesthouseEnrollRequest) {
         Guesthouse guesthouseEntity = GuesthouseConverter.toEntity(guesthouseEnrollRequest);
         Guesthouse savedGusethouse = guesthouseRepository.save(guesthouseEntity);

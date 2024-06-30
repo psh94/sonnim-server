@@ -9,6 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface GuesthouseRepository extends JpaRepository<Guesthouse, Long> {
-    Optional<Guesthouse> findByGuesthouseName(String guesthouseName);
-    List<Guesthouse> findGuesthousesByAddress(String address);
 }

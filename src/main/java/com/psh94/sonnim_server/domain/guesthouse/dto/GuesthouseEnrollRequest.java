@@ -8,14 +8,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GuesthouseEnrollRequest {
+
     @NotBlank
     private String guesthouseName;
+
     @NotBlank
     private String ownerName;
+
     @NotBlank
     private String address;
+
     @NotBlank
     private String phone;
+
     @NotBlank
     private String description;
 

@@ -15,14 +15,14 @@ import java.util.Date;
 public class JwtUtil {
 
     private final Key key;
-    private final long accessTokenValidity;
-    private final long refreshTokenValidity;
+    private final long accessTokenValidity;     // access 토큰 유효기간
+    private final long refreshTokenValidity;    // refresh 토큰 유효기간
 
     public JwtUtil(@Value("${jwt.secret}") String secretKey,
                    @Value("${jwt.access-token-validity}") long accessTokenValidity,
                    @Value("${jwt.refresh-token-validity}") long refreshTokenValidity) {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);    // secretKey를 디코딩하여 byte 배열로 변환
+        this.key = Keys.hmacShaKeyFor(keyBytes);                // byte 배열을 Key 객체로 변환
         this.accessTokenValidity = accessTokenValidity;
         this.refreshTokenValidity = refreshTokenValidity;
     }

@@ -36,10 +36,12 @@ public class ReservationServiceImpl implements ReservationService{
         Reservation reservationEntity = ReservationConverter.toEntity(reservationRequest);
         Reservation savedReservation = reservationRepository.save(reservationEntity);
 
+        // reservationRequest에는 roomInventoryId가 여러개 들어올 수 있음 그러므로 반복문을 통해 하나씩 처리
         for (Long roomInventoryId : reservationRequest.getRoomInventoryIds()) {
             RoomInventory roomInventory = roomInventoryRepository.findById(roomInventoryId)
                     .orElseThrow(() -> new RoomInventoryNotFoundException("RoomInventory not found"));
 
+            // roomInventory의 capacity를 줄여주고 저장
             roomInventory.reduceCapacity(reservationRequest.getHeadcount());
             roomInventoryRepository.save(roomInventory);
 

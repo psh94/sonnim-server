@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * 인증되지 않은 사용자가 보호된 리소스에 접근하려고 할 때 어떤 응답을 반환할지를 정의하는 클래스
+ */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

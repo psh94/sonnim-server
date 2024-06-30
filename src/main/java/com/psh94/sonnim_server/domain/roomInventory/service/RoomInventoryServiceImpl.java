@@ -31,8 +31,10 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
     public RoomInventoryDTO saveInventory(RoomInventoryEnrollRequest roomInventoryEnrollRequest) {
         Room foundRoom = roomRepository.findById(roomInventoryEnrollRequest.getRoomId())
                 .orElseThrow(() -> new RoomNotFoundException("방 정보를 찾을 수 없습니다."));
+
         RoomInventory roomInventoryEntity = RoomInventoryConverter.toEntity(roomInventoryEnrollRequest, foundRoom);
         RoomInventory roomInventory =roomInventoryRepository.save(roomInventoryEntity);
+
         return RoomInventoryConverter.toDTO(roomInventory);
     }
 
@@ -41,6 +43,7 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
     public RoomInventoryDTO getInventoryById(Long id) {
         RoomInventory roomInventory = roomInventoryRepository.findById(id)
                 .orElseThrow(() -> new RoomInventoryNotFoundException("방 인벤토리 정보를 찾을 수 없습니다."));
+
         return RoomInventoryConverter.toDTO(roomInventory);
     }
 
@@ -48,12 +51,13 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
     @Transactional(readOnly = true)
     public List<RoomInventoryDTO> getInventoriesByRoom(Room room) {
         List<RoomInventory> roomInventoryList = roomInventoryRepository.findByRoom(room);
-
         List<RoomInventoryDTO> roomInventoryDTOList = new ArrayList<>();
+
         for(RoomInventory roomInventory : roomInventoryList) {
             RoomInventoryDTO roomInventoryDTO = RoomInventoryConverter.toDTO(roomInventory);
             roomInventoryDTOList.add(roomInventoryDTO);
         }
+
         return roomInventoryDTOList;
     }
 
@@ -64,6 +68,7 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
         if(!roomInventoryRepository.existsById(id)){
             throw new EntityNotFoundException("");
         }
+
         roomInventoryRepository.deleteById(id);
     }
 }

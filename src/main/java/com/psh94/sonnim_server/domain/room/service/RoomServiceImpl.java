@@ -43,11 +43,6 @@ public class RoomServiceImpl implements RoomService{
         return RoomConverter.toDTO(foundRoom);
     }
 
-    /*
-     * JpaRepositoy의 deleteById은 delete문을 실행하기 전에 해당 객체에 매핑된 다른 객체들을 select문을 수행한다.
-     * 만약, 매핑된 다른 객체들이 NULL이라면 select문을 수행하다 에러가 발생할 수 있다.
-     * 그래서 delete문만 수행하는 deleteByIdCustom을 만들어 해당 메서드를 수행한다.
-     */
     @Override
     @Transactional
     @CheckRole({"GUESTHOUSE","ADMIN"})
