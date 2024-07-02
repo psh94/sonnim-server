@@ -3,17 +3,17 @@
 
 ## 프로젝트 목표
 - 야놀자와 같은 컨셉의 게스트하우스 예약 플랫폼 서버를 구축합니다.
-- 객체지향적 코드를 작성을 통해 코드의 재사용성을 높힙니다.
+- 객체지향적이고 재사용성이 높은 코드를 작성할 수 있도록 합니다.
 - CI/CD를 구축하여 무중단 배포를 할 수 있도록 합니다.
 
 ## 사용 기술 및 환경
 - JAVA17
 - SPRING BOOT 3.2.5
-- SPRING DATA JPA
-- AWS RDS (Maria DB)
+- SPRING DATA JPA(Hibernate 6.4.4)
+- MariaDB 10.11(AWS RDS)
 - AWS EC2
 - AWS ECR
-- REDIS
+- REDIS 3.2.4
 - DOCKER
 - GITHUB ACTIONS
 
@@ -28,10 +28,10 @@
 - 객체지향 원칙에 맞는 설계 및 코드 작성여부
 - JWT를 이용한 Token 방식 로그인
 - JWT Refresh 방식을 이용하여 보안 강화
-- Redis Session에 Refresh Token 저장
+- EC2상의 Redis Session에 Refresh Token 저장
 - 로그인 여부에 따른 서비스 접근 허용/제한
 - Member의 Role에 따른 서비스 접근 허용/제한
-- Docker Hub를 이용하여 CI/CD 구축
+- Github Actions를 이용하여 CI/CD 구축
 - Docker, AWS ECR을 이용한 무중단 배포 구현
 
 ## 브랜치 전략
