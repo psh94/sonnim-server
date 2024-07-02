@@ -73,7 +73,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void saveInventory_Success() {
+    void 룸인벤토리_저장_성공() {
         when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
         when(roomInventoryRepository.save(any(RoomInventory.class))).thenReturn(roomInventory);
 
@@ -86,7 +86,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void saveInventory_RoomNotFound_ThrowsException() {
+    void 룸인벤토리_저장_실패() {
         when(roomRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(RoomNotFoundException.class, () -> {
@@ -98,7 +98,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void getInventoryById_Success() {
+    void 룸인벤토리_id로_조회_성공() {
         when(roomInventoryRepository.findById(1L)).thenReturn(Optional.of(roomInventory));
 
         RoomInventoryDTO result = roomInventoryService.getInventoryById(1L);
@@ -110,7 +110,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void getInventoryById_NotFound_ThrowsException() {
+    void 룸인벤토리_id로_조회_실패() {
         when(roomInventoryRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(RoomInventoryNotFoundException.class, () -> {
@@ -121,7 +121,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void getInventoriesByRoom_Success() {
+    void 룸인벤토리_룸으로_조회_성공() {
         when(roomInventoryRepository.findByRoom(room)).thenReturn(Arrays.asList(roomInventory));
 
         List<RoomInventoryDTO> result = roomInventoryService.getInventoriesByRoom(room);
@@ -134,7 +134,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void deleteInventory_Success() {
+    void 룸인벤토리_삭제_성공() {
         when(roomInventoryRepository.existsById(1L)).thenReturn(true);
 
         roomInventoryService.deleteInventory(1L);
@@ -144,7 +144,7 @@ public class RoomInventoryServiceImplTest {
     }
 
     @Test
-    void deleteInventory_NotFound_ThrowsException() {
+    void 룸인벤토리_삭제_실패() {
         when(roomInventoryRepository.existsById(1L)).thenReturn(false);
 
         assertThrows(EntityNotFoundException.class, () -> {

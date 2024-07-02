@@ -118,7 +118,7 @@ public class ReservationServiceImplTest {
 
     @Test
     @Transactional(readOnly = true)
-    void getReservationById_NotFound_ThrowsException() {
+    void 예약_조회_실패() {
         Long reservationId = 1L;
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.empty());
 
@@ -128,7 +128,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void confirmReservation_Success() {
+    void 예약_승인_성공() {
         Long reservationId = 1L;
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
 
@@ -138,7 +138,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void confirmReservation_NotFound_ThrowsException() {
+    void 예약_승인_실패() {
         Long reservationId = 1L;
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.empty());
 
@@ -148,7 +148,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void cancelReservationById_Success() {
+    void 예약_취소_성공() {
         Long reservationId = 1L;
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
         when(reservationRoomInventoryRepository.findByReservation(any(Reservation.class)))
@@ -161,7 +161,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void cancelReservationById_AlreadyCancelled_ThrowsException() {
+    void 예약_취소_실패_이미_취소된_예약() {
         Long reservationId = 1L;
         reservation.setReservationStatus(ReservationStatus.CANCELLED);
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
@@ -174,7 +174,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void deleteReservation_Success() {
+    void 예약_삭제_성공() {
         Long reservationId = 1L;
         reservation.setReservationStatus(ReservationStatus.CANCELLED);
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
@@ -185,7 +185,7 @@ public class ReservationServiceImplTest {
     }
 
     @Test
-    void deleteReservation_NotCancelled_ThrowsException() {
+    void 예약_삭제_실패_취소되지_않은_예약() {
         Long reservationId = 1L;
         reservation.setReservationStatus(ReservationStatus.CONFIRMED);
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
