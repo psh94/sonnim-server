@@ -8,26 +8,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rooms")
 public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping
+    @PostMapping("/rooms")
     public ResponseEntity<?> enrollRoom(@Valid @RequestBody RoomEnrollRequest roomEnrollRequest) {
         RoomDTO roomDTO = roomService.enrollRoom(roomEnrollRequest);
         return ResponseEntity.ok(roomDTO);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getRoomById(@PathVariable Long id) {
-        RoomDTO roomDTO = roomService.getRoomById(id);
+    @GetMapping("/rooms/{roomId}")
+    public ResponseEntity<?> getRoomById(@PathVariable Long roomId) {
+        RoomDTO roomDTO = roomService.getRoomById(roomId);
         return ResponseEntity.ok(roomDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/guesthouse/{guesthouseId}/rooms")
+    public ResponseEntity<?> getRoomsByMemberId(@PathVariable Long guesthouseId) {
+        List<RoomDTO> roomsDTO = roomService.getRoomsByGuesthouseId(guesthouseId);
+        return ResponseEntity.ok(roomsDTO);
+    }
+
+    @DeleteMapping("/rooms/{id}")
     public ResponseEntity<?> deleteRoom(@PathVariable Long id) {
         roomService.deleteRoom(id);
         return ResponseEntity.ok().build();

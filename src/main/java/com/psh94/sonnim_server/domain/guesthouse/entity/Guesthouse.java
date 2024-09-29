@@ -29,7 +29,10 @@ public class Guesthouse extends BaseTimeEntity {
     private String ownerName;
 
     @NotBlank
-    private String address;
+    private String regionCode;
+
+    @NotBlank
+    private String detailAddress;
 
     @NotBlank
     private String phone;
@@ -40,10 +43,11 @@ public class Guesthouse extends BaseTimeEntity {
     private List<Room> rooms = new ArrayList<>();
 
     @Builder
-    public Guesthouse(String guesthouseName, String ownerName, String address, String phone, String description) {
+    public Guesthouse(String guesthouseName, String ownerName, String regionCode, String detailAddress, String phone, String description) {
         this.guesthouseName = guesthouseName;
         this.ownerName = ownerName;
-        this.address = address;
+        this.regionCode = regionCode;
+        this.detailAddress = detailAddress;
         this.phone = phone;
         this.description = description;
     }

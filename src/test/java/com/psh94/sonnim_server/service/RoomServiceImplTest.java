@@ -51,7 +51,8 @@ public class RoomServiceImplTest {
                 .guesthouseName("김씨네 게스트하우스")
                 .ownerName("김OO")
                 .phone("010-1234-1234")
-                .address("jeju")
+                .regionCode("jeju")
+                .detailAddress("xxx")
                 .build();
 
 

@@ -1,5 +1,6 @@
 package com.psh94.sonnim_server.domain.guesthouse.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +11,18 @@ public class GuesthouseDTO {
     private Long id;
     private String guesthouseName;
     private String ownerName;
-    private String address;
+    private String regionCode;
+    private String detailAddress;
     private String phone;
     private String description;
 
     @Builder
-    public GuesthouseDTO(Long id, String guesthouseName, String ownerName, String address, String phone, String description) {
+    public GuesthouseDTO(Long id, String guesthouseName, String ownerName, String regionCode, String detailAddress, String phone, String description) {
         this.id = id;
         this.guesthouseName = guesthouseName;
         this.ownerName = ownerName;
-        this.address = address;
+        this.regionCode = regionCode;
+        this.detailAddress = detailAddress;
         this.phone = phone;
         this.description = description;
     }

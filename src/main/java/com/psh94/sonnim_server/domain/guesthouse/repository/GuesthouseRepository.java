@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface GuesthouseRepository extends JpaRepository<Guesthouse, Long> {
+public interface GuesthouseRepository extends JpaRepository<Guesthouse, Long> , GuesthouseRepositoryCustom{
 }
