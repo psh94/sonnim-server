@@ -10,7 +10,6 @@
 - JAVA17
 - SPRING BOOT 3.2.5
 - SPRING DATA JPA(Hibernate 6.4.4)
-- QueryDSL
 - MariaDB 10.11(AWS RDS)
 - AWS EC2
 - AWS ECR
@@ -53,6 +52,7 @@
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /reservations/{id}  | 예약 조회     |
+| GET    | /members/{id}/reservations  | 회원별 예약 전체 조회     |
 | POST   | /reservations       | 예약 생성     |
 | POST   | /reservations/{id}  | 예약 취소     |
 | DELETE | /reservations/{id}  | 예약 삭제     |
@@ -63,6 +63,8 @@
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /guesthouses/{id}  | 게스트하우스 조회     |
+| GET    | /guesthouses/searchRegion  | 지역별 게스트하우스 조회     |
+| GET    | /guesthouses/searchWord  | 게스트하우스 검색     |
 | POST   | /guesthouses       | 게스트하우스 생성     |
 | DELETE | /guesthouses/{id}  | 게스트하우스 삭제     |
 
@@ -71,6 +73,7 @@
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /rooms/{id}  | 방 정보 조회     |
+| GET    | /guesthouse/{guesthouseId}/rooms  | 게스트하우스별 방 정보 전체 조회     |
 | POST   | /rooms       | 방 정보 생성     |
 | DELETE | /rooms/{id}  | 방 정보 삭제     |
 
