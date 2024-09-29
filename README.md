@@ -10,6 +10,7 @@
 - JAVA17
 - SPRING BOOT 3.2.5
 - SPRING DATA JPA(Hibernate 6.4.4)
+- QueryDSL
 - MariaDB 10.11(AWS RDS)
 - AWS EC2
 - AWS ECR
