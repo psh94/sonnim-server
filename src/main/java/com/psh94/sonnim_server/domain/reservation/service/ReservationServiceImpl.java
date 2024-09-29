@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -63,6 +64,17 @@ public class ReservationServiceImpl implements ReservationService{
                 .orElseThrow(() -> new ReservationNotFoundException("예약을 찾을 수 없습니다."));
 
         return ReservationConverter.toDTO(foundReservation);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ReservationDTO> getReservationsByMemberId(Long id) {
+
+        List<Reservation> reservations = reservationRepository.findReservationsByMemberId(id);
+
+        return reservations.stream()
+                .map(ReservationConverter::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

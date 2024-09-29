@@ -16,7 +16,10 @@ public class GuesthouseEnrollRequest {
     private String ownerName;
 
     @NotBlank
-    private String address;
+    private String regionCode;
+
+    @NotBlank
+    private String detailAddress;
 
     @NotBlank
     private String phone;
@@ -25,10 +28,11 @@ public class GuesthouseEnrollRequest {
     private String description;
 
     @Builder
-    public GuesthouseEnrollRequest(String guesthouseName, String ownerName, String address, String phone, String description) {
+    public GuesthouseEnrollRequest(String guesthouseName, String ownerName, String regionCode, String detailAddress, String phone, String description) {
         this.guesthouseName = guesthouseName;
         this.ownerName = ownerName;
-        this.address = address;
+        this.regionCode = regionCode;
+        this.detailAddress = detailAddress;
         this.phone = phone;
         this.description = description;
     }

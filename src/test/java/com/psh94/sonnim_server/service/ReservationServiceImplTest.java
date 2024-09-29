@@ -1,5 +1,6 @@
 package com.psh94.sonnim_server.service;
 
+import com.psh94.sonnim_server.common.converter.ReservationConverter;
 import com.psh94.sonnim_server.common.exception.ReservationAlreadyCancelledException;
 import com.psh94.sonnim_server.common.exception.ReservationNotFoundException;
 import com.psh94.sonnim_server.common.exception.RoomInventoryNotFoundException;
@@ -22,11 +23,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -125,6 +127,35 @@ public class ReservationServiceImplTest {
         assertThrows(ReservationNotFoundException.class, () -> {
             reservationService.getReservationById(reservationId);
         });
+    }
+
+    @Test
+    void 회원_예약목록_조회_성공() {
+        List<Reservation> reservations = new ArrayList<>();
+        reservations.add(reservation);
+
+        when(reservationRepository.findReservationsByMemberId(1L)).thenReturn(reservations);
+
+        List<ReservationDTO> result = reservationService.getReservationsByMemberId(1L);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(reservation.getId(), result.get(0).getId());
+        assertEquals(reservation.getHeadcount(), result.get(0).getHeadcount());
+
+        verify(reservationRepository, times(1)).findReservationsByMemberId(1L);
+    }
+
+    @Test
+    void 회원_예약목록_조회_결과없음() {
+        when(reservationRepository.findReservationsByMemberId(1L)).thenReturn(new ArrayList<>());
+
+        List<ReservationDTO> result = reservationService.getReservationsByMemberId(1L);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+
+        verify(reservationRepository, times(1)).findReservationsByMemberId(1L);
     }
 
     @Test

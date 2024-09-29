@@ -11,7 +11,8 @@ public class GuesthouseConverter {
                 .guesthouseName(guesthouseEnrollRequest.getGuesthouseName())
                 .ownerName(guesthouseEnrollRequest.getOwnerName())
                 .phone(guesthouseEnrollRequest.getPhone())
-                .address(guesthouseEnrollRequest.getAddress())
+                .regionCode(guesthouseEnrollRequest.getRegionCode())
+                .detailAddress(guesthouseEnrollRequest.getDetailAddress())
                 .description(guesthouseEnrollRequest.getDescription())
                 .build();
     }
@@ -22,6 +23,8 @@ public class GuesthouseConverter {
                 .guesthouseName(guesthouse.getGuesthouseName())
                 .ownerName(guesthouse.getOwnerName())
                 .phone(guesthouse.getPhone())
+                .regionCode(guesthouse.getRegionCode())
+                .detailAddress(guesthouse.getDetailAddress())
                 .description(guesthouse.getDescription())
                 .build();
     }

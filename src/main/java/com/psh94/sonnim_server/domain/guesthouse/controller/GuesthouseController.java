@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/guesthouses")
@@ -26,6 +28,19 @@ public class GuesthouseController {
         GuesthouseDTO guesthouse = guesthouseService.getGuesthouse(id);
         return ResponseEntity.ok(guesthouse);
     }
+
+    @GetMapping("/searchRegion")
+    public ResponseEntity<?> getGuesthousesByRegionCode(String regionCode) {
+        List<GuesthouseDTO> guesthouse = guesthouseService.getGuesthouseListByRegionCode(regionCode);
+        return ResponseEntity.ok(guesthouse);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchGuesthouses(String searchWord) {
+        List<GuesthouseDTO> guesthouses = guesthouseService.getGuesthouseListByWord(searchWord);
+        return ResponseEntity.ok(guesthouses);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteGuesthouse(@PathVariable Long id) {
