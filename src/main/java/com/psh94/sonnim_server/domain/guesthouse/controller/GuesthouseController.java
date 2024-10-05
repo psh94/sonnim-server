@@ -31,13 +31,13 @@ public class GuesthouseController {
 
     @GetMapping("/searchRegion")
     public ResponseEntity<?> getGuesthousesByRegionCode(String regionCode) {
-        List<GuesthouseDTO> guesthouse = guesthouseService.getGuesthouseListByRegionCode(regionCode);
+        List<GuesthouseDTO> guesthouse = guesthouseService.getGuesthousesByRegionCode(regionCode);
         return ResponseEntity.ok(guesthouse);
     }
 
     @GetMapping("/searchWord")
     public ResponseEntity<?> searchGuesthouses(String searchWord) {
-        List<GuesthouseDTO> guesthouses = guesthouseService.getGuesthouseListByWord(searchWord);
+        List<GuesthouseDTO> guesthouses = guesthouseService.getGuesthousesByWord(searchWord);
         return ResponseEntity.ok(guesthouses);
     }
 

@@ -13,10 +13,7 @@ public class AddressService {
 
     // 지역명으로 지역 코드를 찾아 반환
     public String getRegionCodeFromAddress(String searchWords) {
-        // 검색어가 포함된 주소 정보 조회
-        Address address = addressRepository.findByAddressContaining(searchWords);
-
-        // 주소가 존재하면 해당 지역 코드 반환
-        return address != null ? address.getRegionCode() : null;
+        Address address = addressRepository.findByAddressContaining(searchWords);   // 검색어가 포함된 주소 정보 조회
+        return address != null ? address.getRegionCode() : null;                    // 주소가 존재하면 해당 지역 코드 반환
     }
 }

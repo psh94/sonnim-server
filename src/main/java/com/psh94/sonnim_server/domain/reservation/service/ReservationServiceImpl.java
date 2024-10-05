@@ -68,9 +68,9 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReservationDTO> getReservationsByMemberId(Long id) {
+    public List<ReservationDTO> getReservationsByMemberId(Long memberId) {
 
-        List<Reservation> reservations = reservationRepository.findReservationsByMemberId(id);
+        List<Reservation> reservations = reservationRepository.findReservationsByMemberId(memberId);
 
         return reservations.stream()
                 .map(ReservationConverter::toDTO)

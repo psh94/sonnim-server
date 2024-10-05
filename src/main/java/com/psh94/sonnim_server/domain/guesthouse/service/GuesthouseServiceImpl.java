@@ -40,7 +40,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<GuesthouseDTO> getGuesthouseListByRegionCode(String regionCode) {
+    public List<GuesthouseDTO> getGuesthousesByRegionCode(String regionCode) {
         List<Guesthouse> guesthouses = guesthouseRepository.findGuesthousesByRegionCode(regionCode);
 
         return guesthouses.stream()
@@ -50,7 +50,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<GuesthouseDTO> getGuesthouseListByWord(String searchWord) {
+    public List<GuesthouseDTO> getGuesthousesByWord(String searchWord) {
         String regionCode = addressService.getRegionCodeFromAddress(searchWord);
 
         List<Guesthouse> guesthouses;

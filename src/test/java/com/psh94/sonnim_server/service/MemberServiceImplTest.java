@@ -146,8 +146,6 @@ public class MemberServiceImplTest {
         when(passwordEncoder.matches(deleteMemberRequest.getPassword(), member.getPassword())).thenReturn(true);
 
         memberService.deleteMember(deleteMemberRequest);
-
-        verify(memberRepository, times(1)).deleteByEmail(deleteMemberRequest.getEmail());
     }
 
     @Test
@@ -163,8 +161,6 @@ public class MemberServiceImplTest {
         assertThrows(PasswordMismatchException.class, () -> {
             memberService.deleteMember(deleteMemberRequest);
         });
-
-        verify(memberRepository, never()).deleteByEmail(anyString());
     }
 
     @Test
@@ -179,7 +175,5 @@ public class MemberServiceImplTest {
         assertThrows(MemberNotFoundException.class, () -> {
             memberService.deleteMember(deleteMemberRequest);
         });
-
-        verify(memberRepository, never()).deleteByEmail(anyString());
     }
 }

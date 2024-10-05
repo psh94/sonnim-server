@@ -1,6 +1,7 @@
 package com.psh94.sonnim_server.domain.payment.service;
 
 import com.psh94.sonnim_server.common.converter.PaymentConverter;
+import com.psh94.sonnim_server.common.converter.ReservationConverter;
 import com.psh94.sonnim_server.domain.payment.domain.Payment;
 import com.psh94.sonnim_server.domain.payment.domain.PaymentStatus;
 import com.psh94.sonnim_server.domain.payment.dto.PaymentCreateRequest;
@@ -11,6 +12,9 @@ import com.psh94.sonnim_server.domain.reservation.repository.ReservationReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +43,16 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new IllegalArgumentException("Payment not found"));
         return PaymentConverter.toDTO(payment);  // Entity -> DTO 변환
+    }
+
+    @Override
+    public List<PaymentDTO> getPaymentsByMemberId(Long memberId) {
+
+        List<Payment> payments = paymentRepository.findPaymentsByMemberId(memberId);
+
+        return payments.stream()
+                .map(PaymentConverter::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional

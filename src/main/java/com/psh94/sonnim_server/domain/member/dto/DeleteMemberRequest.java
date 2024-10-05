@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 public class DeleteMemberRequest {
 
     @NotBlank
-    @Email
-    @Column(unique = true)
+    @Email(regexp = "^[\\w\\.-]+@[\\w\\.-]+\\.[a-z]{2,}$", message = "유효한 이메일 주소를 입력해주세요.")
     private String email;
 
     @NotBlank

@@ -1,11 +1,14 @@
 package com.psh94.sonnim_server.domain.payment.controller;
 
+import com.psh94.sonnim_server.domain.payment.domain.Payment;
 import com.psh94.sonnim_server.domain.payment.dto.PaymentCreateRequest;
 import com.psh94.sonnim_server.domain.payment.dto.PaymentDTO;
 import com.psh94.sonnim_server.domain.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +29,12 @@ public class PaymentController {
     public ResponseEntity<?> completePayment(@PathVariable Long paymentId) {
         paymentService.completePayment(paymentId);
         return ResponseEntity.ok("Payment completed successfully.");
+    }
+
+    @GetMapping("/member/{id}")
+    public ResponseEntity<?> getPaymentsByMemberId(@PathVariable Long memberId){
+        List<PaymentDTO> payments = paymentService.getPaymentsByMemberId(memberId);
+        return ResponseEntity.ok(payments);
     }
 
     // 결제 취소 처리

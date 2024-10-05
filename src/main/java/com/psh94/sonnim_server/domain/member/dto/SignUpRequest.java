@@ -1,7 +1,6 @@
 package com.psh94.sonnim_server.domain.member.dto;
 
-import com.psh94.sonnim_server.domain.member.constant.Role;
-import jakarta.persistence.Column;
+import com.psh94.sonnim_server.domain.member.entity.Role;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SignUpRequest {
 
     @NotBlank
-    @Email(message = "유효한 이메일 형식이어야 합니다.")
-    @Column(unique = true)
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
     private String email;
 
     @NotBlank
@@ -40,6 +38,7 @@ public class SignUpRequest {
         this.role = role;
     }
 
+    // 비밀번호 인코딩 메서드
     public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
     }

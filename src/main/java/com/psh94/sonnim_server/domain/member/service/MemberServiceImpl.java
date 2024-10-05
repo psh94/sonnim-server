@@ -81,6 +81,6 @@ public class MemberServiceImpl implements MemberService{
             throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
 
-        memberRepository.deleteByEmail(foundMember.getEmail());                                     // 회원 삭제
+        memberRepository.deleteById(foundMember.getId());                                     // 회원 삭제
     }
 }

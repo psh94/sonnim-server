@@ -8,7 +8,7 @@ import java.util.List;
 public interface GuesthouseService {
     GuesthouseDTO enrollGuesthouse(GuesthouseEnrollRequest guesthouseEnrollRequest);    // 게스트하우스 등록
     GuesthouseDTO getGuesthouse (Long id);                                              // 게스트하우스 단건조회
-    List<GuesthouseDTO> getGuesthouseListByRegionCode(String regionCode);               // 게스트하우스 리스트조회(카테고리로 검색 - 지역코드)
-    List<GuesthouseDTO> getGuesthouseListByWord(String word);                           // 게스트하우스 리스트조회(직접 검색)
+    List<GuesthouseDTO> getGuesthousesByRegionCode(String regionCode);               // 게스트하우스 리스트조회(카테고리로 검색 - 지역코드)
+    List<GuesthouseDTO> getGuesthousesByWord(String word);                           // 게스트하우스 리스트조회(직접 검색)
     void deleteGuesthouse (Long id);                                                    // 게스트하우스 삭제
 }

@@ -1,11 +1,11 @@
 package com.psh94.sonnim_server.domain.member.entity;
 
 import com.psh94.sonnim_server.common.utils.BaseTimeEntity;
-import com.psh94.sonnim_server.domain.member.constant.Role;
+import com.psh94.sonnim_server.domain.payment.domain.Payment;
 import com.psh94.sonnim_server.domain.reservation.entity.Reservation;
+import com.psh94.sonnim_server.domain.review.entity.Review;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,23 +25,31 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @NotBlank
     @Email(message = "올바르지 않은 이메일 형식입니다.")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @NotBlank
+    @Column(nullable = false)
     private String password;
 
-    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @NotBlank
+    @Column(nullable = false)
     private String phone;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments = new ArrayList<>();
 
     @Builder
     private Member(String email, String password, String name, String phone, Role role) {
@@ -52,7 +60,5 @@ public class Member extends BaseTimeEntity {
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reservation> reservations = new ArrayList<>();
 
 }

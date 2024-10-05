@@ -119,7 +119,7 @@ public class GuesthouseServiceImplTest {
         when(guesthouseRepository.findGuesthousesByRegionCode("0101")).thenReturn(guesthouseList);
 
         // searchWord로 검색
-        List<GuesthouseDTO> result = guesthouseService.getGuesthouseListByWord("서울");
+        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("서울");
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -137,7 +137,7 @@ public class GuesthouseServiceImplTest {
         when(guesthouseRepository.findGuesthousesByWord("SEOUL")).thenReturn(guesthouseList);
 
         // searchWord로 검색
-        List<GuesthouseDTO> result = guesthouseService.getGuesthouseListByWord("SEOUL");
+        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("SEOUL");
 
         assertNotNull(result);
         assertEquals(1, result.size());
@@ -153,7 +153,7 @@ public class GuesthouseServiceImplTest {
         when(guesthouseRepository.findGuesthousesByWord("SEOUL")).thenReturn(List.of());
 
         // searchWords로 검색
-        List<GuesthouseDTO> result = guesthouseService.getGuesthouseListByWord("SEOUL");
+        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("SEOUL");
 
         assertNotNull(result);
         assertTrue(result.isEmpty());

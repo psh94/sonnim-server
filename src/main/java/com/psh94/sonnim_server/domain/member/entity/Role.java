@@ -1,4 +1,4 @@
-package com.psh94.sonnim_server.domain.member.constant;
+package com.psh94.sonnim_server.domain.member.entity;
 
 public enum Role {
     ADMIN("ROLE_ADNIM"),

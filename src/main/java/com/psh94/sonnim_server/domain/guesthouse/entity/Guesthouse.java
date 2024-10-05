@@ -1,6 +1,7 @@
 package com.psh94.sonnim_server.domain.guesthouse.entity;
 
 import com.psh94.sonnim_server.common.utils.BaseTimeEntity;
+import com.psh94.sonnim_server.domain.review.entity.Review;
 import com.psh94.sonnim_server.domain.room.entity.Room;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -41,6 +42,9 @@ public class Guesthouse extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "guesthouse", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "guesthouse", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     @Builder
     public Guesthouse(String guesthouseName, String ownerName, String regionCode, String detailAddress, String phone, String description) {
