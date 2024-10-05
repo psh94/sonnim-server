@@ -47,4 +47,5 @@ public class Room extends BaseTimeEntity {
         roomInventories.remove(roomInventory);
         roomInventory.setRoom(null);
     }
+
 }
