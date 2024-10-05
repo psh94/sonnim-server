@@ -35,7 +35,7 @@ public class GuesthouseController {
         return ResponseEntity.ok(guesthouse);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/searchWord")
     public ResponseEntity<?> searchGuesthouses(String searchWord) {
         List<GuesthouseDTO> guesthouses = guesthouseService.getGuesthouseListByWord(searchWord);
         return ResponseEntity.ok(guesthouses);
