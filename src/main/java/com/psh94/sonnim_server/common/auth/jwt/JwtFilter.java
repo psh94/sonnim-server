@@ -45,6 +45,12 @@ public class JwtFilter extends OncePerRequestFilter {
         token = header.substring(7);
         userId = jwtUtil.getUserIdFromToken(token);
 
+        if (userId == null) {
+            // 인증 실패 시 명확한 응답 추가
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "토큰이 유효하지 않습니다.");
+            return;
+        }
+
         Member member = memberRepository.findById(userId)
                 .orElseThrow(()-> new MemberNotFoundException("회원을 찾을 수 없습니다."));
 
@@ -58,6 +64,9 @@ public class JwtFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "토큰이 유효하지 않습니다.");
+                return;
             }
         }
 

@@ -1,7 +1,7 @@
 package com.psh94.sonnim_server.domain.member.entity;
 
 public enum Role {
-    ADMIN("ROLE_ADNIM"),
+    ADMIN("ROLE_ADMIN"),
     USER("ROLE_USER"),
     GUESTHOUSE("ROLE_GUESTHOUSE");
 

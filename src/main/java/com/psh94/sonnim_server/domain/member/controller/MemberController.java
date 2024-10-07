@@ -21,7 +21,7 @@ public class MemberController {
 
     @PostMapping("/join")
     public ResponseEntity<?> createMember(@RequestBody @Valid SignUpRequest signUpRequest) {
-        log.info("signUpRequest: {}", signUpRequest);
+        log.info("회원 가입 요청 - email: {}, name: {}, phone: {}", signUpRequest.getEmail(), signUpRequest.getName(), signUpRequest.getPhone());
         MemberDTO savedMember = memberService.createMember(signUpRequest);
         return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
     }
@@ -34,7 +34,7 @@ public class MemberController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteUser(@Valid @RequestBody DeleteMemberRequest deleteMemberRequest) {
-        log.info("deleteMemberRequest: {}", deleteMemberRequest);
+        log.info("회원 탈퇴 요청 - email: {}", deleteMemberRequest.getEmail());
         memberService.deleteMember(deleteMemberRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

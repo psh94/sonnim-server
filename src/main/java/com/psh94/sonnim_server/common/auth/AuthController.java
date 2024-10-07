@@ -6,6 +6,9 @@ import com.psh94.sonnim_server.common.auth.jwt.RefreshToken;
 import com.psh94.sonnim_server.common.redis.repository.RefreshTokenRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,7 +31,7 @@ public class AuthController {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @PostMapping("/login")
-    public Map<String, String> login(@Valid @RequestBody LoginForm loginForm) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginForm loginForm) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()) // 인증 요청
@@ -44,13 +47,14 @@ public class AuthController {
                     .token(refreshToken)
                     .build());
 
-            Map<String, String> response = new HashMap<>();
-            response.put("accessToken", accessToken);
-            response.put("refreshToken", refreshToken);
+            AuthResponse response = AuthResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
 
-            return response;
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (AuthenticationException e) {
-            throw new RuntimeException("Invalid login credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid login credentials");
         }
     }
 

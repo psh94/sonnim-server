@@ -5,6 +5,7 @@ import com.psh94.sonnim_server.domain.guesthouse.dto.GuesthouseEnrollRequest;
 import com.psh94.sonnim_server.domain.guesthouse.service.GuesthouseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,18 +30,26 @@ public class GuesthouseController {
         return ResponseEntity.ok(guesthouse);
     }
 
-    @GetMapping("/searchRegion")
-    public ResponseEntity<?> getGuesthousesByRegionCode(String regionCode) {
-        List<GuesthouseDTO> guesthouse = guesthouseService.getGuesthousesByRegionCode(regionCode);
-        return ResponseEntity.ok(guesthouse);
-    }
 
-    @GetMapping("/searchWord")
-    public ResponseEntity<?> searchGuesthouses(String searchWord) {
-        List<GuesthouseDTO> guesthouses = guesthouseService.getGuesthousesByWord(searchWord);
+    @GetMapping("/search/region")
+    public ResponseEntity<Page<GuesthouseDTO>> getGuesthousesByRegionCode(
+            @RequestParam String regionCode,
+            @RequestParam(defaultValue = "1") int page,  // 기본 값으로 0페이지를 설정
+            @RequestParam(defaultValue = "20") int size  // 기본 크기는 20개로 설정
+    ) {
+        Page<GuesthouseDTO> guesthouses = guesthouseService.getGuesthousesByRegionCode(regionCode, page, size);
         return ResponseEntity.ok(guesthouses);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Page<GuesthouseDTO>> getGuesthousesByWord(
+            @RequestParam String searchWord,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        Page<GuesthouseDTO> guesthouses = guesthouseService.getGuesthousesByWord(searchWord, page, size);
+        return ResponseEntity.ok(guesthouses);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteGuesthouse(@PathVariable Long id) {

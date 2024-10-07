@@ -1,6 +1,5 @@
 package com.psh94.sonnim_server.domain.member.service;
 
-import com.psh94.sonnim_server.common.auth.CheckRole;
 import com.psh94.sonnim_server.common.auth.jwt.CustomUserDetails;
 import com.psh94.sonnim_server.common.converter.MemberConverter;
 import com.psh94.sonnim_server.common.exception.EmailAlreadyExistsException;
@@ -12,6 +11,7 @@ import com.psh94.sonnim_server.domain.member.dto.SignUpRequest;
 import com.psh94.sonnim_server.domain.member.entity.Member;
 import com.psh94.sonnim_server.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,7 +53,7 @@ public class MemberServiceImpl implements MemberService{
                 .orElseThrow(()-> new MemberNotFoundException("회원을 찾을 수 없습니다."));
 
         if (!foundMember.getEmail().equals(loginedMemberEmail)) {                               // 조회한 회원의 이메일과 로그인한 회원의 이메일 비교
-            throw new RuntimeException("접근이 거부되었습니다.");
+            throw new AccessDeniedException("접근이 거부되었습니다.");
         }
 
         return MemberConverter.toDTO(foundMember);                                              // Entity to DTO
