@@ -1,9 +1,7 @@
 package com.psh94.sonnim_server.domain.roomInventory.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,10 +9,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class RoomInventoryEnrollRequest {
 
+    @NotNull
     private LocalDate reservationDate;
+
+    @NotNull
     private int restCapacity;
+
+    @NotNull
     private int price;
+
+    @NotNull
     private Long roomId;
 }

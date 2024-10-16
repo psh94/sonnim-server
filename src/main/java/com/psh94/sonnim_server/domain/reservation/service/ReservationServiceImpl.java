@@ -32,7 +32,6 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional
-    @CheckRole({"USER","ADMIN"})
     public ReservationDTO createReservation(ReservationRequest reservationRequest) {
         Reservation reservationEntity = ReservationConverter.toEntity(reservationRequest);
         Reservation savedReservation = reservationRepository.save(reservationEntity);
@@ -42,8 +41,13 @@ public class ReservationServiceImpl implements ReservationService{
             RoomInventory roomInventory = roomInventoryRepository.findById(roomInventoryId)
                     .orElseThrow(() -> new RoomInventoryNotFoundException("RoomInventory not found"));
 
-            // roomInventory의 capacity를 줄여주고 저장
-            roomInventory.reduceCapacity(reservationRequest.getHeadcount());
+            // 동시성 문제를 예방하기 위해 체크 후 감소 및 저장
+            synchronized (roomInventory) {
+                if (roomInventory.getRestCapacity() < reservationRequest.getHeadcount()) {
+                    throw new IllegalStateException("방에 남은 자리가 부족합니다.");
+                }
+                roomInventory.reduceCapacity(reservationRequest.getHeadcount());
+            }
             roomInventoryRepository.save(roomInventory);
 
             ReservationRoomInventory reservationRoomInventory = ReservationRoomInventory.builder()
@@ -78,7 +82,7 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    @CheckRole({"GUESTHOUSE","ADMIN"})
+    @Transactional
     public void confirmReservation(Long id) {
         Reservation foundReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("예약을 찾을 수 없습니다."));
@@ -89,7 +93,6 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void cancelReservationById(Long id) {
         Reservation foundReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("예약을 찾을 수 없습니다."));
@@ -111,7 +114,6 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void deleteReservation(Long id) {
         Reservation foundReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ReservationNotFoundException("예약을 찾을 수 없습니다."));

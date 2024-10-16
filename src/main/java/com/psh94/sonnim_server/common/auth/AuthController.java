@@ -50,7 +50,7 @@ public class AuthController {
 
             return response;
         } catch (AuthenticationException e) {
-            throw new RuntimeException("Invalid login credentials");
+            throw new RuntimeException("로그인 자격이 유효하지 않습니다.");
         }
     }
 
@@ -77,7 +77,7 @@ public class AuthController {
             response.put("refreshToken", newRefreshToken);
             return response;
         } else {
-            throw new RuntimeException("Invalid refresh token");
+            throw new RuntimeException("refresh 토큰이 유효하지 않습니다.");
         }
     }
 
@@ -87,14 +87,18 @@ public class AuthController {
 
         RefreshToken storedToken = refreshTokenRepository.findByToken(refreshTokenFromRequest);
 
+        if (storedToken == null) {
+            throw new RuntimeException("refresh 토큰이 만료되었거나 찾을 수 없습니다.");
+        }
+
         if (storedToken != null && jwtUtil.validateToken(storedToken.getToken())) {
             refreshTokenRepository.deleteByUserId(storedToken.getUserId());
 
             Map<String, String> response = new HashMap<>();
-            response.put("message", "Logged out successfully");
+            response.put("message", "로그아웃에 성공하였습니다.");
             return response;
         } else {
-            throw new RuntimeException("Invalid refresh token");
+            throw new RuntimeException("refresh 토큰이 유효하지 않습니다.");
         }
     }
 }

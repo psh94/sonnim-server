@@ -12,30 +12,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/members")
 @RequiredArgsConstructor
-@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/join")
-    public ResponseEntity<?> createMember(@RequestBody @Valid SignUpRequest signUpRequest) {
-        log.info("signUpRequest: {}", signUpRequest);
+    @PostMapping("/signup")
+    public ResponseEntity<MemberDTO> createMember(@RequestBody @Valid SignUpRequest signUpRequest) {
         MemberDTO savedMember = memberService.createMember(signUpRequest);
-        return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedMember);
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<?> findMemberById() {
+    @GetMapping("/members/me")
+    public ResponseEntity<MemberDTO> findMemberById() {
         MemberDTO memberDTO = memberService.findMemberByAuth();
-        return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+        return ResponseEntity.ok(memberDTO);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteUser(@Valid @RequestBody DeleteMemberRequest deleteMemberRequest) {
-        log.info("deleteMemberRequest: {}", deleteMemberRequest);
+    @DeleteMapping("/members")
+    public ResponseEntity<Void> deleteMember(@Valid @RequestBody DeleteMemberRequest deleteMemberRequest) {
         memberService.deleteMember(deleteMemberRequest);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

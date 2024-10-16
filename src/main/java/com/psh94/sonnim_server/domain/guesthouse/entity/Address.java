@@ -17,11 +17,9 @@ public class Address {
     @Column(name = "address_id", nullable = false)
     private Long id;
 
-    @NotBlank
     @Column(nullable = false)
     private String regionCode;
 
-    @NotBlank
     @Column(nullable = false)
     private String regionName;
 

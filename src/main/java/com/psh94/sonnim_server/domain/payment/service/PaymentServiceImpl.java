@@ -73,6 +73,10 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new IllegalArgumentException("Payment not found"));
 
+        if (payment.getPaymentStatus() != PaymentStatus.COMPLETED) {
+            throw new IllegalStateException("Only completed payments can be cancelled");
+        }
+
         payment.cancel();  // 결제 취소 메서드 호출
         paymentRepository.save(payment);
     }

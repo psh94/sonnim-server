@@ -66,12 +66,13 @@ public class MemberServiceImpl implements MemberService{
 
         if (authentication.getPrincipal() instanceof UserDetails) {                             // 인증된 사용자의 Principal의 타입이 UserDetails인 경우 (Principal은 인증된 유저 객체)
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();  // 해당 Principal을 CustomUserDetails로 형변환
-            return userDetails.getUsername(); // email을 반환
+            return userDetails.getUsername();                                                   // email을 반환
         } else {
             return authentication.getPrincipal().toString();
         }
     }
 
+    @Override
     @Transactional
     public void deleteMember(DeleteMemberRequest deleteMemberRequest) {
         Member foundMember = memberRepository.findByEmail(deleteMemberRequest.getEmail())           // 이메일로 회원 조회

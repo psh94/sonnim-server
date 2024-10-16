@@ -1,5 +1,6 @@
 package com.psh94.sonnim_server.domain.reservation.controller;
 
+import com.psh94.sonnim_server.common.auth.CheckRole;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationDTO;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationRequest;
 import com.psh94.sonnim_server.domain.reservation.service.ReservationService;
@@ -16,6 +17,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/reservations")
+    @CheckRole({"USER","ADMIN"})
     public ResponseEntity<?> createReservation(@RequestBody ReservationRequest reservationRequest) {
         ReservationDTO reservationDTO = reservationService.createReservation(reservationRequest);
         return ResponseEntity.ok(reservationDTO);
@@ -28,17 +30,20 @@ public class ReservationController {
     }
 
     @GetMapping("/members/{id}/reservations")
+    @CheckRole({"USER","ADMIN"})
     public ResponseEntity<?> getReservationsByMemberId(@PathVariable Long id) {
         List<ReservationDTO> reservations = reservationService.getReservationsByMemberId(id);
         return ResponseEntity.ok(reservations);
     }
 
     @PostMapping("/reservations/{id}")
+    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void cancelReservation(@PathVariable Long id) {
         reservationService.cancelReservationById(id);
     }
 
     @DeleteMapping("/reservations/{id}")
+    @CheckRole({"ADMIN"})
     public void deleteReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);
     }

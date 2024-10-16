@@ -27,7 +27,6 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public RoomInventoryDTO saveInventory(RoomInventoryEnrollRequest roomInventoryEnrollRequest) {
         Room foundRoom = roomRepository.findById(roomInventoryEnrollRequest.getRoomId())
                 .orElseThrow(() -> new RoomNotFoundException("방 정보를 찾을 수 없습니다."));
@@ -63,7 +62,6 @@ public class RoomInventoryServiceImpl implements RoomInventoryService {
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void deleteInventory(Long id) {
         if(!roomInventoryRepository.existsById(id)){
             throw new EntityNotFoundException("");

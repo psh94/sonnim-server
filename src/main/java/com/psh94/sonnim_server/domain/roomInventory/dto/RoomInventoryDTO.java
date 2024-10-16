@@ -1,20 +1,26 @@
 package com.psh94.sonnim_server.domain.roomInventory.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "id")
 public class RoomInventoryDTO {
 
+    @NotNull
     private Long id;
+
+    @NotNull
     private LocalDate reservationDate;
+
+    @NotNull
     private int restCapacity;
+
+    @NotNull
     private int price;
 }

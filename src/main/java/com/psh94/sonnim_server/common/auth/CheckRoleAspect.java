@@ -2,6 +2,7 @@ package com.psh94.sonnim_server.common.auth;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,12 +21,12 @@ public class CheckRoleAspect {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException("인증되지 않은 사용자입니다.");
+            throw new AccessDeniedException("인증되지 않은 사용자입니다.");
         }
 
         Set<String> userRoles = getCurrentUserRoles(authentication);
-        if (userRoles == null || userRoles.isEmpty()) {
-            throw new RuntimeException("사용자의 역할을 알 수 없습니다.");
+        if (userRoles.isEmpty()) {
+            throw new AccessDeniedException("사용자의 역할을 확인할 수 없습니다.");
         }
 
         Set<String> requiredRoles = Arrays.stream(checkRole.value())
@@ -33,7 +34,7 @@ public class CheckRoleAspect {
                 .collect(Collectors.toSet());
 
         if (userRoles.stream().noneMatch(requiredRoles::contains)) {
-            throw new RuntimeException("사용자가 요구되는 역할을 가지고 있지 않습니다.");
+            throw new AccessDeniedException("요구되는 역할이 없습니다.");
         }
     }
 

@@ -18,17 +18,21 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "roomInventories")
+@Table(name = "room_inventories")
 public class RoomInventory extends BaseTimeEntity {
 
-    @Id @GeneratedValue
-    @Column(name = "roomInventory_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "room_inventory_id")
     private Long id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(name = "reservation_date")
+    @Column(name = "reservation_date", nullable = false)
     private LocalDate reservationDate;
+
+    @Column(nullable = false)
     private int restCapacity;
+
+    @Column(nullable = false)
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,13 +52,19 @@ public class RoomInventory extends BaseTimeEntity {
     }
 
     public void reduceCapacity(int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("감소시킬 수량은 양수여야 합니다.");
+        }
         if (restCapacity < amount) {
-            throw new IllegalArgumentException("Insufficient capacity to reduce");
+            throw new IllegalArgumentException("남은 용량이 부족하여 예약을 처리할 수 없습니다. 현재 남은 용량: " + restCapacity);
         }
         this.restCapacity -= amount;
     }
 
     public void addCapacity(int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("추가할 수량은 양수여야 합니다.");
+        }
         this.restCapacity += amount;
     }
 }
