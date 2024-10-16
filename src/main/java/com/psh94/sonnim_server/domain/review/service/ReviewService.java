@@ -8,7 +8,6 @@ public interface ReviewService {
 
     ReviewDTO createReview(ReviewDTO reviewDTO);
     ReviewDTO getReview(Long id);
-    List<ReviewDTO> getAllReviews();
     List<ReviewDTO> getReviewsByGuesthouseId(Long guesthouseId);
     List<ReviewDTO> getReviewsByMemberId(Long memberId);
     void deleteReview(Long id);

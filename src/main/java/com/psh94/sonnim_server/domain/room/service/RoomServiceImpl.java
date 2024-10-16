@@ -26,7 +26,6 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public RoomDTO enrollRoom(RoomEnrollRequest roomEnrollRequest) {
 
         Guesthouse guesthouse = roomGuesthouseRepository.findById(roomEnrollRequest.getGuesthouseId())
@@ -59,7 +58,6 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void deleteRoom(Long id) {
         if(!roomRepository.existsById(id)) {
             throw new RoomNotFoundException("방 정보를 찾을 수 없습니다.");

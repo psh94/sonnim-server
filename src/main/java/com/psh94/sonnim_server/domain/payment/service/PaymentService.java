@@ -10,7 +10,6 @@ public interface PaymentService {
 
     PaymentDTO createPayment(PaymentCreateRequest paymentRequest);
     PaymentDTO getPaymentById(Long paymentId);
-
     List<PaymentDTO> getPaymentsByMemberId(Long memberId);
     void completePayment(Long paymentId);
     void cancelPayment(Long paymentId);

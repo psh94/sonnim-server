@@ -27,12 +27,6 @@ public class ReviewController {
         return ResponseEntity.ok(reviewDTO);
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllReviews() {
-        List<ReviewDTO> reviews = reviewService.getAllReviews();
-        return ResponseEntity.ok(reviews);
-    }
-
     // 게스트하우스별 리뷰 조회
     @GetMapping("/guesthouse/{guesthouseId}")
     public ResponseEntity<?> getReviewsByGuesthouseId(@PathVariable Long guesthouseId) {

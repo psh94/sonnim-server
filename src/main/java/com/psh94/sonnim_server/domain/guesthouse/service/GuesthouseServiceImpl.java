@@ -23,7 +23,6 @@ public class GuesthouseServiceImpl implements GuesthouseService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})  // GUESTHOUSE, ADMIN 권한을 가진 사용자만 접근 가능
     public GuesthouseDTO enrollGuesthouse(GuesthouseEnrollRequest guesthouseEnrollRequest) {
         Guesthouse guesthouseEntity = GuesthouseConverter.toEntity(guesthouseEnrollRequest);
         Guesthouse savedGusethouse = guesthouseRepository.save(guesthouseEntity);
@@ -68,7 +67,6 @@ public class GuesthouseServiceImpl implements GuesthouseService{
 
     @Override
     @Transactional
-    @CheckRole({"GUESTHOUSE","ADMIN"})
     public void deleteGuesthouse(Long id) {
         if(!guesthouseRepository.existsById(id)) {
             throw new GuesthouseNotFoundException("게스트하우스를 찾을 수 없습니다.");

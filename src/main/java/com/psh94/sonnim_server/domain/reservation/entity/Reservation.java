@@ -19,10 +19,12 @@ public class Reservation extends BaseTimeEntity {
     @Column(name = "reservation_id")
     private Long id;
 
+    @Column(nullable = false)
     private int headcount;
 
     @Enumerated(EnumType.STRING)
     @Setter
+    @Column(nullable = false)
     private ReservationStatus reservationStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)

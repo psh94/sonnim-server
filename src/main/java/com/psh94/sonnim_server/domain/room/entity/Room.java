@@ -21,7 +21,10 @@ public class Room extends BaseTimeEntity {
     @Column(name = "room_id")
     private Long id;
 
+    @Column(nullable = false)
     private String roomName;
+
+    @Column(nullable = false)
     private int maxCapacity;
 
     @ManyToOne(fetch = FetchType.LAZY)

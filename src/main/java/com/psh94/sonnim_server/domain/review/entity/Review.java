@@ -1,6 +1,8 @@
 package com.psh94.sonnim_server.domain.review.entity;
 
 import com.psh94.sonnim_server.common.utils.BaseTimeEntity;
+import com.psh94.sonnim_server.domain.guesthouse.entity.Guesthouse;
+import com.psh94.sonnim_server.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,9 +25,17 @@ public class Review extends BaseTimeEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
     @Lob
+    @Column(nullable = false)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "guesthouse_id")
+    private Guesthouse guesthouse;
 
     @Builder
     public Review(int score, String title, String content) {

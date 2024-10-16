@@ -23,21 +23,22 @@ public class Guesthouse extends BaseTimeEntity {
     @Column(name = "guesthouse_id")
     private Long id;
 
-    @NotBlank
+    @Column(nullable = false)
     private String guesthouseName;
 
-    @NotBlank
+    @Column(nullable = false)
     private String ownerName;
 
-    @NotBlank
+    @Column(nullable = false)
     private String regionCode;
 
-    @NotBlank
+    @Column(nullable = false)
     private String detailAddress;
 
-    @NotBlank
+    @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
     private String description;
 
     @OneToMany(mappedBy = "guesthouse", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

@@ -33,15 +33,6 @@ public class ReviewServiceImpl implements ReviewService {
         return ReviewConverter.toDTO(review);
     }
 
-    // 모든 리뷰 조회
-    @Transactional(readOnly = true)
-    public List<ReviewDTO> getAllReviews() {
-        List<Review> reviews = reviewRepository.findAll();
-        return reviews.stream()
-                .map(ReviewConverter::toDTO)
-                .collect(Collectors.toList());
-    }
-
     // 게스트하우스별 리뷰 조회
     @Transactional(readOnly = true)
     public List<ReviewDTO> getReviewsByGuesthouseId(Long guesthouseId) {

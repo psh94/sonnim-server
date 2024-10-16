@@ -1,5 +1,6 @@
 package com.psh94.sonnim_server.domain.roomInventory.controller;
 
+import com.psh94.sonnim_server.common.auth.CheckRole;
 import com.psh94.sonnim_server.domain.roomInventory.dto.RoomInventoryEnrollRequest;
 import com.psh94.sonnim_server.domain.roomInventory.service.RoomInventoryService;
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ public class RoomInventoryController {
     private final RoomInventoryService roomInventoryService;
 
     @PostMapping
+    @CheckRole({"ADMIN","GUESTHOUSE"})
     public ResponseEntity<?> createRoomInventory(@Valid @RequestBody RoomInventoryEnrollRequest roomInventoryEnrollRequest) {
         roomInventoryService.saveInventory(roomInventoryEnrollRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -30,6 +32,7 @@ public class RoomInventoryController {
     }
 
     @DeleteMapping("/{id}")
+    @CheckRole({"ADMIN","GUESTHOUSE"})
     public ResponseEntity<?> deleteRoomInventory(@PathVariable Long id) {
         roomInventoryService.deleteInventory(id);
         return ResponseEntity.ok().build();

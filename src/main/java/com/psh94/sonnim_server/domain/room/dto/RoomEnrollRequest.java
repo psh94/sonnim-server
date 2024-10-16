@@ -1,18 +1,23 @@
 package com.psh94.sonnim_server.domain.room.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class RoomEnrollRequest {
 
+    @NotNull
     private Long guesthouseId;
+
+    @NotBlank
     private String roomName;
+
+    @NotNull
     private int maxCapacity;
 
 }

@@ -4,12 +4,10 @@ import com.psh94.sonnim_server.domain.member.entity.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@ToString(exclude = "id")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

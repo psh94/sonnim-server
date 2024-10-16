@@ -46,9 +46,9 @@ public class Payment extends BaseTimeEntity {
 
     // 결제 취소 메서드
     public void cancel() {
-        if (this.paymentStatus == PaymentStatus.CANCELED) {
+        if (this.paymentStatus == PaymentStatus.CANCELLED) {
             throw new IllegalStateException("Payment is already canceled");
         }
-        this.paymentStatus = PaymentStatus.CANCELED;
+        this.paymentStatus = PaymentStatus.CANCELLED;
     }
 }
