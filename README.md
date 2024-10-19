@@ -40,11 +40,12 @@
 
 | 메서드 | 엔드포인트  | 설명         |
 |---------|-----------|---------------------|
+| POST    | /signup      | 회원 등록           |
 | GET     | /members/me  | 회원정보 조회        |
-| POST    | /members/join| 회원 등록           |
 | DELETE  | /members     | 회원 삭제           |
 | POST    | /auth/login  | 로그인             |
 | POST    | /auth/logout | 로그아웃            |
+| POST    | /auth/refresh | 리프레시 토큰 발급   |
 
 
 **RESERVATION**
@@ -52,7 +53,7 @@
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /reservations/{id}  | 예약 조회     |
-| GET    | /members/{id}/reservations  | 회원별 예약 전체 조회     |
+| GET    | /members/{memberId}/reservations  | 회원별 예약 전체 조회     |
 | POST   | /reservations       | 예약 생성     |
 | POST   | /reservations/{id}  | 예약 취소     |
 | DELETE | /reservations/{id}  | 예약 삭제     |
@@ -63,8 +64,8 @@
 | 메서드 | 엔드포인트  | 설명         |
 |--------|-----------|---------------------|
 | GET    | /guesthouses/{id}  | 게스트하우스 조회     |
-| GET    | /guesthouses/searchRegion  | 지역별 게스트하우스 조회     |
-| GET    | /guesthouses/searchWord  | 게스트하우스 검색     |
+| GET    | /guesthouses/region/{regionCode}  | 지역별 게스트하우스 조회     |
+| GET    | /guesthouses/search | 게스트하우스 검색     |
 | POST   | /guesthouses       | 게스트하우스 생성     |
 | DELETE | /guesthouses/{id}  | 게스트하우스 삭제     |
 
@@ -84,3 +85,25 @@
 | GET    | /roomsInventories/{id}  | 방 조회     |
 | POST   | /roomsInventories       | 방 생성     |
 | DELETE | /roomsInventories/{id}  | 방 삭제     |
+
+**PAYMENT**
+
+| 메서드 | 엔드포인트  | 설명         |
+|--------|-----------|---------------------|
+| POST    | /payments | 결제 생성      |
+| POST   | /payments/complete/{paymentId} | 결제 완료 처리      |
+| POST   | /payments/cancel/{paymentId} | 결제 취소 처리      |
+| GET    | /members/{memberId}/payments | 회원별 결제내역 조회      |
+| GET    | /payments/{paymentId} |  결제내역 단건 조회      |
+
+
+**REVIEW**
+
+| 메서드 | 엔드포인트  | 설명         |
+|--------|-----------|---------------------|
+| POST    | /guesthouse/{guesthouseId}/reviews | 게스트하우스 리뷰 생성      |
+| GET    | /guesthouse/{guesthouseId}/reviews | 게스트하우스별 리뷰 조회      |
+| POST    | /reviews/{id} | 리뷰 단건 조회      |
+| POST    | /member/{memberId}/reviews | 회원별 리뷰 조회      |
+| DELETE    | /reviews/{id} | 리뷰 삭제      |
+
