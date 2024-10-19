@@ -21,8 +21,8 @@
 ![diagram2](https://github.com/psh94/sonnim-server/assets/84213252/b2a4d60d-367d-43fa-98fb-865765c5e3ea)
 
 ## ERD
+![1](https://github.com/user-attachments/assets/34fb36d7-79cd-4f2b-9181-298efce38d18)
 
-![erd](https://github.com/psh94/sonnim-server/assets/84213252/fd2b027e-49b3-4649-8410-ce0801b9e4d6)
 
 ## 중점사항
 - 객체지향 원칙에 맞는 설계 및 코드 작성여부
