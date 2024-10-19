@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,7 +116,7 @@ public class GuesthouseServiceImplTest {
         List<Guesthouse> guesthouseList = List.of(guesthouse);
 
         // 검색어로 지역 코드가 존재할 때의 시나리오
-        when(addressService.getRegionCodeFromAddress("서울")).thenReturn("0101");
+        when(addressService.getRegionCodeFromAddress("서울")).thenReturn(Arrays.asList("0101", "0102"));
         when(guesthouseRepository.findGuesthousesByRegionCode("0101")).thenReturn(guesthouseList);
 
         // searchWord로 검색

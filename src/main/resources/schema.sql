@@ -1,24 +1,30 @@
 START TRANSACTION;
 
 -- Delete existing data from tables
+DELETE FROM payments;
+DELETE FROM reservation_room_inventories;
+DELETE FROM reservations;
 DELETE FROM room_inventories;
 DELETE FROM rooms;
 DELETE FROM guesthouses;
-DELETE FROM addresses;
 DELETE FROM members;
+DELETE FROM addresses;
 
 -- Reset AUTO_INCREMENT values (optional)
+ALTER TABLE payments AUTO_INCREMENT = 1;
 ALTER TABLE room_inventories AUTO_INCREMENT = 1;
 ALTER TABLE rooms AUTO_INCREMENT = 1;
 ALTER TABLE guesthouses AUTO_INCREMENT = 1;
 ALTER TABLE addresses AUTO_INCREMENT = 1;
 ALTER TABLE members AUTO_INCREMENT = 1;
+ALTER TABLE reservations AUTO_INCREMENT = 1;
+ALTER TABLE reservation_room_inventories AUTO_INCREMENT = 1;
 
 
 -- Insert member values
 INSERT INTO members(email, password, name, phone, role)
 VALUES
-    ('admin@sonnim.com', '$2a$10$1UitCmGBo5GMvT5a62OSoOktzwDvAdeQ8eE2f.b98HD/wAZC7WtVS', 'admin', '010-1111-1111', 'ADMIN'),
+    ('admin@sonnim.com', '$2a$10$h14/EbjcuAgfNLndS/rEpe5wKwrZ0awYrY3ZXWiBiYXvWvz/QXHda', 'admin', '010-1111-1111', 'ADMIN'),
     ('shp@sonnim.com', '$2a$10$h14/EbjcuAgfNLndS/rEpe5wKwrZ0awYrY3ZXWiBiYXvWvz/QXHda', '박OO', '010-1234-1234', 'USER'),
     ('choi@sonnim.com', '$2a$10$h14/EbjcuAgfNLndS/rEpe5wKwrZ0awYrY3ZXWiBiYXvWvz/QXHda', '최OO', '010-1234-1234', 'GUESTHOUSE');
 
@@ -35,9 +41,17 @@ VALUES
     ('0202', '제주특별자치도 서귀포시');
 
 -- Insert room values
-INSERT INTO rooms(room_name, max_capacity)
+INSERT INTO rooms(room_name, guesthouse_id, max_capacity)
 VALUES
-    ('도미토리 6인실', 6),
-    ('개인 2인실', 2);
+    ('도미토리 6인실', 1, 6),
+    ('개인 2인실', 1, 2);
+
+INSERT INTO room_inventories(room_id, reservation_date, rest_capacity, price)
+VALUES
+    (1, '2024-11-01', 6, 25000),
+    (1, '2024-11-02', 6, 25000),
+    (1, '2024-11-03', 6, 25000),
+    (1, '2024-11-04', 6, 25000),
+    (1, '2024-11-05', 6, 25000);
 
 COMMIT;

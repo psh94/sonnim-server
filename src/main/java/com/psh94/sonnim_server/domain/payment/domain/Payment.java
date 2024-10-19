@@ -14,7 +14,7 @@ public class Payment extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id", nullable = false)
+    @Column(name = "payment_id")
     private Long id;
 
     @Column(nullable = false)
@@ -37,11 +37,12 @@ public class Payment extends BaseTimeEntity {
     private Member member;
 
     @Builder
-    public Payment(String paymentMethod, int totalPrice, PaymentStatus paymentStatus, Reservation reservation) {
+    public Payment(String paymentMethod, int totalPrice, PaymentStatus paymentStatus, Reservation reservation, Member member) {
         this.paymentMethod = paymentMethod;
         this.totalPrice = totalPrice;
         this.paymentStatus = paymentStatus;
         this.reservation = reservation;
+        this.member = member;
     }
 
     // 결제 취소 메서드

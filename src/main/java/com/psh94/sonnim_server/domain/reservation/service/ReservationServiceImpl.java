@@ -1,10 +1,12 @@
 package com.psh94.sonnim_server.domain.reservation.service;
 
-import com.psh94.sonnim_server.common.auth.CheckRole;
+import com.psh94.sonnim_server.common.converter.MemberConverter;
 import com.psh94.sonnim_server.common.converter.ReservationConverter;
 import com.psh94.sonnim_server.common.exception.ReservationAlreadyCancelledException;
 import com.psh94.sonnim_server.common.exception.ReservationNotFoundException;
 import com.psh94.sonnim_server.common.exception.RoomInventoryNotFoundException;
+import com.psh94.sonnim_server.domain.member.dto.MemberDTO;
+import com.psh94.sonnim_server.domain.member.service.MemberService;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationDTO;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationRequest;
 import com.psh94.sonnim_server.domain.reservation.entity.Reservation;
@@ -28,12 +30,14 @@ public class ReservationServiceImpl implements ReservationService{
     private final ReservationRepository reservationRepository;
     private final RoomInventoryRepository roomInventoryRepository;
     private final ReservationRoomInventoryRepository reservationRoomInventoryRepository;
+    private final MemberService memberService;
 
 
     @Override
     @Transactional
     public ReservationDTO createReservation(ReservationRequest reservationRequest) {
-        Reservation reservationEntity = ReservationConverter.toEntity(reservationRequest);
+        MemberDTO foundMember = memberService.findMemberByAuth();
+        Reservation reservationEntity = ReservationConverter.toEntity(reservationRequest, foundMember);
         Reservation savedReservation = reservationRepository.save(reservationEntity);
 
         // reservationRequest에는 roomInventoryId가 여러개 들어올 수 있음 그러므로 반복문을 통해 하나씩 처리

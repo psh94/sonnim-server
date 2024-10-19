@@ -38,10 +38,12 @@ public class Review extends BaseTimeEntity {
     private Guesthouse guesthouse;
 
     @Builder
-    public Review(int score, String title, String content) {
-        setScore(score);  // 점수 유효성 검사 후 설정
+    public Review(int score, String title, String content, Member member, Guesthouse guesthouse) {
+        this.score = score;
         this.title = title;
         this.content = content;
+        this.member = member;
+        this.guesthouse = guesthouse;
     }
 
     // 점수 유효성 검사

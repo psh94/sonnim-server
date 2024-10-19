@@ -1,7 +1,15 @@
 package com.psh94.sonnim_server.domain.review.service;
 
 import com.psh94.sonnim_server.common.converter.ReviewConverter;
+import com.psh94.sonnim_server.common.exception.GuesthouseNotFoundException;
+import com.psh94.sonnim_server.domain.guesthouse.dto.GuesthouseDTO;
+import com.psh94.sonnim_server.domain.guesthouse.entity.Guesthouse;
+import com.psh94.sonnim_server.domain.guesthouse.repository.GuesthouseRepository;
+import com.psh94.sonnim_server.domain.member.dto.MemberDTO;
+import com.psh94.sonnim_server.domain.member.entity.Member;
+import com.psh94.sonnim_server.domain.member.service.MemberService;
 import com.psh94.sonnim_server.domain.review.dto.ReviewDTO;
+import com.psh94.sonnim_server.domain.review.dto.ReviewEnrollRequest;
 import com.psh94.sonnim_server.domain.review.entity.Review;
 import com.psh94.sonnim_server.domain.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +24,16 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final MemberService memberService;
+    private final GuesthouseRepository guesthouseRepository;
 
     // 리뷰 생성
     @Transactional
-    public ReviewDTO createReview(ReviewDTO reviewDTO) {
-        Review review = ReviewConverter.toEntity(reviewDTO);
+    public ReviewDTO createReview(Long guesthouseId, ReviewEnrollRequest reviewEnrollRequest) {
+        MemberDTO foundMember = memberService.findMemberByAuth();
+        Guesthouse guesthouse = guesthouseRepository.findById(guesthouseId)
+                .orElseThrow(() -> new GuesthouseNotFoundException("해당 게스트하우스 정보를 찾을 수 없습니다."));
+        Review review = ReviewConverter.toEntity(reviewEnrollRequest, foundMember, guesthouse);
         Review savedReview = reviewRepository.save(review);
         return ReviewConverter.toDTO(savedReview);
     }

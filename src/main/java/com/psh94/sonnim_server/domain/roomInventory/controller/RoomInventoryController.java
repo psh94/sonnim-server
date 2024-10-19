@@ -1,6 +1,7 @@
 package com.psh94.sonnim_server.domain.roomInventory.controller;
 
 import com.psh94.sonnim_server.common.auth.CheckRole;
+import com.psh94.sonnim_server.domain.roomInventory.dto.RoomInventoryDTO;
 import com.psh94.sonnim_server.domain.roomInventory.dto.RoomInventoryEnrollRequest;
 import com.psh94.sonnim_server.domain.roomInventory.service.RoomInventoryService;
 import jakarta.validation.Valid;
@@ -27,8 +28,8 @@ public class RoomInventoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoomInventory(@PathVariable Long id) {
-        roomInventoryService.getInventoryById(id);
-        return ResponseEntity.ok(roomInventoryService.getInventoryById(id));
+        RoomInventoryDTO roomInventoryDTO = roomInventoryService.getInventoryById(id);
+        return ResponseEntity.ok(roomInventoryDTO);
     }
 
     @DeleteMapping("/{id}")

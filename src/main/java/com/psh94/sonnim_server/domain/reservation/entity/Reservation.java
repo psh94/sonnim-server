@@ -2,6 +2,7 @@ package com.psh94.sonnim_server.domain.reservation.entity;
 
 import com.psh94.sonnim_server.common.utils.BaseTimeEntity;
 import com.psh94.sonnim_server.domain.member.entity.Member;
+import com.psh94.sonnim_server.domain.payment.domain.PaymentStatus;
 import com.psh94.sonnim_server.domain.reservationRoomInventory.entity.ReservationRoomInventory;
 import jakarta.persistence.*;
 import lombok.*;
