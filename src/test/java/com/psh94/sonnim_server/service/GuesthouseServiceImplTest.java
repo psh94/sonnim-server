@@ -43,7 +43,7 @@ public class GuesthouseServiceImplTest {
     @BeforeEach
     void setUp() throws Exception {
         guesthouseEnrollRequest = GuesthouseEnrollRequest.builder()
-                .guesthouseName("SEOUL")
+                .guesthouseName("서울")
                 .ownerName("kim")
                 .regionCode("0101")
                 .detailAddress("xxx")
@@ -51,7 +51,7 @@ public class GuesthouseServiceImplTest {
                 .build();
 
         guesthouse = Guesthouse.builder()
-                .guesthouseName("SEOUL")
+                .guesthouseName("서울")
                 .ownerName("kim")
                 .regionCode("0101")
                 .detailAddress("xxx")
@@ -64,7 +64,7 @@ public class GuesthouseServiceImplTest {
 
         guesthouseDTO = GuesthouseDTO.builder()
                 .id(1L)
-                .guesthouseName("SEOUL")
+                .guesthouseName("서울")
                 .ownerName("kim")
                 .regionCode("0101")
                 .detailAddress("xxx")
@@ -115,51 +115,57 @@ public class GuesthouseServiceImplTest {
     void 게스트하우스_검색_지역코드로_성공() {
         List<Guesthouse> guesthouseList = List.of(guesthouse);
 
-        // 검색어로 지역 코드가 존재할 때의 시나리오
+        // "서울"이 포함된 지역 코드를 반환하는 AddressService의 동작 시나리오
         when(addressService.getRegionCodeFromAddress("서울")).thenReturn(Arrays.asList("0101", "0102"));
-        when(guesthouseRepository.findGuesthousesByRegionCode("0101")).thenReturn(guesthouseList);
 
-        // searchWord로 검색
+        // 다중 지역 코드로 게스트하우스를 리스트로 반환
+        when(guesthouseRepository.findGuesthousesByRegionCodeIn(String.valueOf(Arrays.asList("0101", "0102")))).thenReturn(guesthouseList);
+
+        // 서비스 메서드 호출 (서울로 검색)
         List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("서울");
 
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(guesthouseDTO.getRegionCode(), result.get(0).getRegionCode());
+        // 결과 검증
+        assertNotNull(result, "결과는 null이 아니어야 합니다.");
+        assertEquals(1, result.size(), "결과는 1개의 게스트하우스여야 합니다.");
+        assertEquals(guesthouseDTO.getRegionCode(), result.get(0).getRegionCode(), "지역 코드는 기대한 값과 일치해야 합니다.");
+
+        // 호출 검증
         verify(addressService, times(1)).getRegionCodeFromAddress("서울");
-        verify(guesthouseRepository, times(1)).findGuesthousesByRegionCode("0101");
+        verify(guesthouseRepository, times(1)).findGuesthousesByRegionCodeIn(String.valueOf(Arrays.asList("0101", "0102")));
     }
+
 
     @Test
     void 게스트하우스_검색_이름으로_성공() {
         List<Guesthouse> guesthouseList = List.of(guesthouse);
 
         // 검색어로 지역 코드가 없을 때의 시나리오
-        when(addressService.getRegionCodeFromAddress("SEOUL")).thenReturn(null);
-        when(guesthouseRepository.findGuesthousesByWord("SEOUL")).thenReturn(guesthouseList);
+        when(addressService.getRegionCodeFromAddress("서울")).thenReturn(null);
+        when(guesthouseRepository.findGuesthousesByWord("서울")).thenReturn(guesthouseList);
 
         // searchWord로 검색
-        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("SEOUL");
+        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("서울");
 
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(guesthouseDTO.getGuesthouseName(), result.get(0).getGuesthouseName());
-        verify(addressService, times(1)).getRegionCodeFromAddress("SEOUL");
-        verify(guesthouseRepository, times(1)).findGuesthousesByWord("SEOUL");
+        verify(addressService, times(1)).getRegionCodeFromAddress("서울");
+        verify(guesthouseRepository, times(1)).findGuesthousesByWord("서울");
     }
 
     @Test
     void 게스트하우스_검색_결과없음() {
         // 검색어로 지역 코드가 없고, 게스트하우스 검색 결과도 없을 때의 시나리오
-        when(addressService.getRegionCodeFromAddress("SEOUL")).thenReturn(null);
-        when(guesthouseRepository.findGuesthousesByWord("SEOUL")).thenReturn(List.of());
+        when(addressService.getRegionCodeFromAddress("서울")).thenReturn(null);
+        when(guesthouseRepository.findGuesthousesByWord("서울")).thenReturn(List.of());
 
         // searchWords로 검색
-        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("SEOUL");
+        List<GuesthouseDTO> result = guesthouseService.getGuesthousesByWord("서울");
 
         assertNotNull(result);
         assertTrue(result.isEmpty());
-        verify(addressService, times(1)).getRegionCodeFromAddress("SEOUL");
-        verify(guesthouseRepository, times(1)).findGuesthousesByWord("SEOUL");
+        verify(addressService, times(1)).getRegionCodeFromAddress("서울");
+        verify(guesthouseRepository, times(1)).findGuesthousesByWord("서울");
     }
 
     @Test

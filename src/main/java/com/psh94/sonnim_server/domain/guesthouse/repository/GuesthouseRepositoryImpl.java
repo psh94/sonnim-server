@@ -14,12 +14,12 @@ public class GuesthouseRepositoryImpl implements GuesthouseRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Guesthouse> findGuesthousesByRegionCode(String regionCode) {
+    public List<Guesthouse> findGuesthousesByRegionCodeIn(String regionCodes) {
         QGuesthouse guesthouse = QGuesthouse.guesthouse;
 
         return queryFactory
                 .selectFrom(guesthouse)
-                .where(guesthouse.regionCode.eq(regionCode))
+                .where(guesthouse.regionCode.in(regionCodes))
                 .fetch();
     }
 

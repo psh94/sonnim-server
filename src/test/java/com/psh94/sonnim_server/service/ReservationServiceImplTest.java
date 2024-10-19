@@ -4,6 +4,9 @@ import com.psh94.sonnim_server.common.converter.ReservationConverter;
 import com.psh94.sonnim_server.common.exception.ReservationAlreadyCancelledException;
 import com.psh94.sonnim_server.common.exception.ReservationNotFoundException;
 import com.psh94.sonnim_server.common.exception.RoomInventoryNotFoundException;
+import com.psh94.sonnim_server.domain.member.dto.MemberDTO;
+import com.psh94.sonnim_server.domain.member.entity.Role;
+import com.psh94.sonnim_server.domain.member.service.MemberService;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationDTO;
 import com.psh94.sonnim_server.domain.reservation.dto.ReservationRequest;
 import com.psh94.sonnim_server.domain.reservation.entity.Reservation;
@@ -48,11 +51,15 @@ public class ReservationServiceImplTest {
     @InjectMocks
     private ReservationServiceImpl reservationService;
 
+    @Mock
+    private MemberService memberService;
+
     private ReservationRequest reservationRequest;
     private Reservation reservation;
     private RoomInventory roomInventory;
     private ReservationRoomInventory reservationRoomInventory;
     private ReservationDTO reservationDTO;
+    private MemberDTO memberDTO;
 
     @BeforeEach
     void setUp() {
@@ -82,6 +89,15 @@ public class ReservationServiceImplTest {
                 .headcount(3)
                 .reservationStatus(ReservationStatus.PENDING)
                 .build();
+
+        memberDTO = MemberDTO.builder()
+                .id(1L)
+                .email("test@test.com")
+                .password("test1234")
+                .name("kim")
+                .phone("010-1234-1234")
+                .role(Role.USER)
+                .build();
     }
 
     @Test
@@ -89,6 +105,7 @@ public class ReservationServiceImplTest {
         when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
         when(roomInventoryRepository.findById(anyLong())).thenReturn(Optional.of(roomInventory));
         when(reservationRoomInventoryRepository.save(any(ReservationRoomInventory.class))).thenReturn(reservationRoomInventory);
+        when(memberService.findMemberByAuth()).thenReturn(memberDTO);
 
         ReservationDTO result = reservationService.createReservation(reservationRequest);
 
@@ -101,6 +118,7 @@ public class ReservationServiceImplTest {
     void 예약_생성_룸_인벤토리_조회_실패() {
         when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
         when(roomInventoryRepository.findById(anyLong())).thenReturn(Optional.empty());
+        when(memberService.findMemberByAuth()).thenReturn(memberDTO);
 
         assertThrows(RoomInventoryNotFoundException.class, () -> {
             reservationService.createReservation(reservationRequest);

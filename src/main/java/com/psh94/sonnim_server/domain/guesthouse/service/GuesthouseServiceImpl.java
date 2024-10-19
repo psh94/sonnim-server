@@ -40,7 +40,7 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     @Override
     @Transactional(readOnly = true)
     public List<GuesthouseDTO> getGuesthousesByRegionCode(String regionCode) {
-        List<Guesthouse> guesthouses = guesthouseRepository.findGuesthousesByRegionCode(regionCode);
+        List<Guesthouse> guesthouses = guesthouseRepository.findGuesthousesByRegionCodeIn(regionCode);
 
         return guesthouses.stream()
                 .map(GuesthouseConverter::toDTO)
@@ -50,14 +50,14 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     @Override
     @Transactional(readOnly = true)
     public List<GuesthouseDTO> getGuesthousesByWord(String searchWord) {
-        List<String> regionCode = addressService.getRegionCodeFromAddress(searchWord);
+        List<String> regionCodes = addressService.getRegionCodeFromAddress(searchWord);
 
         List<Guesthouse> guesthouses;
 
-        if (regionCode.isEmpty()) {
+        if (regionCodes == null || regionCodes.isEmpty()) {
             guesthouses = guesthouseRepository.findGuesthousesByWord(searchWord);
         } else {
-            guesthouses = guesthouseRepository.findGuesthousesByRegionCode(searchWord);
+            guesthouses = guesthouseRepository.findGuesthousesByRegionCodeIn(regionCodes.toString());
         }
 
         return guesthouses.stream()

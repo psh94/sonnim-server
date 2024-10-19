@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface GuesthouseRepositoryCustom {
 
-    List<Guesthouse> findGuesthousesByRegionCode(String regionCode);
+    List<Guesthouse> findGuesthousesByRegionCodeIn(String regionCode);
     List<Guesthouse> findGuesthousesByWord(String searchWord);
 }
