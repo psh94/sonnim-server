@@ -50,14 +50,14 @@ public class GuesthouseServiceImpl implements GuesthouseService{
     @Override
     @Transactional(readOnly = true)
     public List<GuesthouseDTO> getGuesthousesByWord(String searchWord) {
-        String regionCode = addressService.getRegionCodeFromAddress(searchWord);
+        List<String> regionCode = addressService.getRegionCodeFromAddress(searchWord);
 
         List<Guesthouse> guesthouses;
 
-        if (regionCode == null) {
+        if (regionCode.isEmpty()) {
             guesthouses = guesthouseRepository.findGuesthousesByWord(searchWord);
         } else {
-            guesthouses = guesthouseRepository.findGuesthousesByRegionCode(regionCode);
+            guesthouses = guesthouseRepository.findGuesthousesByRegionCode(searchWord);
         }
 
         return guesthouses.stream()

@@ -60,5 +60,11 @@ public class Member extends BaseTimeEntity {
         this.role = role;
     }
 
+    // id를 나중에 설정할 수 있는 메서드
+    public Member withId(Long id) {
+        this.id = id;
+        return this;
+    }
+
 
 }

@@ -36,12 +36,6 @@ public class ReservationController {
         return ResponseEntity.ok(reservations);
     }
 
-    @PostMapping("/reservations/{id}")
-    @CheckRole({"GUESTHOUSE","ADMIN"})
-    public void cancelReservation(@PathVariable Long id) {
-        reservationService.cancelReservationById(id);
-    }
-
     @DeleteMapping("/reservations/{id}")
     @CheckRole({"ADMIN"})
     public void deleteReservation(@PathVariable Long id) {

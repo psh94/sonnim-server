@@ -28,6 +28,22 @@ public class MemberConverter {
                 .build();
     }
 
+    public static Member toEntity(MemberDTO memberDTO){
+        Member member = Member.builder()
+                .email(memberDTO.getEmail())
+                .password(memberDTO.getPassword())
+                .name(memberDTO.getName())
+                .phone(memberDTO.getPhone())
+                .role(memberDTO.getRole())
+                .build();
+
+        member.withId(memberDTO.getId());
+
+        return member;
+
+
+    }
+
     public static MemberDTO toDTO(Member member){
         return MemberDTO.builder()
                 .id(member.getId())

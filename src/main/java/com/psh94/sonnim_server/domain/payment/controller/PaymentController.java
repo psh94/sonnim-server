@@ -28,7 +28,7 @@ public class PaymentController {
     @PostMapping("/payments/complete/{paymentId}")
     public ResponseEntity<?> completePayment(@PathVariable Long paymentId) {
         paymentService.completePayment(paymentId);
-        return ResponseEntity.ok("Payment completed successfully.");
+        return ResponseEntity.ok("결제가 완료처리 되었습니다.");
     }
 
     // 결제내역 조회
@@ -40,10 +40,10 @@ public class PaymentController {
 
     // 결제 취소 처리
     @PostMapping("/payments/cancel/{paymentId}")
-    @CheckRole({"AdMIN"})
+    @CheckRole({"ADMIN"})
     public ResponseEntity<?> cancelPayment(@PathVariable Long paymentId) {
         paymentService.cancelPayment(paymentId);
-        return ResponseEntity.ok("Payment canceled successfully.");
+        return ResponseEntity.ok("결제가 성공적으로 취소되었습니다.");
     }
 
     // 특정 결제 정보 조회
