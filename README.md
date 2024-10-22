@@ -23,6 +23,9 @@
 ## ERD
 ![1](https://github.com/user-attachments/assets/34fb36d7-79cd-4f2b-9181-298efce38d18)
 
+## 프로토타입
+https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMgmbYDsomvjh-1
+
 
 ## 중점사항
 - 객체지향 원칙에 맞는 설계 및 코드 작성여부
@@ -109,8 +112,7 @@
 
 
 
-## UI
-https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMgmbYDsomvjh-1
+
 
 
 
