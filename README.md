@@ -110,16 +110,7 @@
 
 
 ## UI
-
-![1](https://github.com/user-attachments/assets/78a54df7-09aa-4ad0-92dc-29d1021dbcf9)
-![2](https://github.com/user-attachments/assets/f8d1c06e-fd06-42aa-8860-c6a13331bde0)
-![3](https://github.com/user-attachments/assets/2bdd323a-f315-4490-b846-2ad418a62c46)
-![4](https://github.com/user-attachments/assets/2fa9b380-d563-4fa3-85e0-64346b37ab27)
-![5](https://github.com/user-attachments/assets/5344f4bf-2eda-483f-a656-feb9fd831975)
-![7](https://github.com/user-attachments/assets/3897f50d-e773-46a7-8631-ad0afb80cbf6)
-
-
-
+https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMgmbYDsomvjh-1
 
 
 
