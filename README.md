@@ -32,8 +32,7 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 - JWT를 이용한 Token 방식 로그인
 - JWT Refresh 방식을 이용하여 보안 강화
 - EC2상의 Redis Session에 Refresh Token 저장
-- 로그인 여부에 따른 서비스 접근 허용/제한
-- Member의 Role에 따른 서비스 접근 허용/제한
+- 결제 시, 날짜별 재고 관리
 - Github Actions를 이용하여 CI/CD 구축
 - Docker, AWS ECR을 이용한 무중단 배포 구현
 
