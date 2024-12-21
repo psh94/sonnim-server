@@ -29,10 +29,10 @@ public class ReservationController {
         return ResponseEntity.ok(reservationDTO);
     }
 
-    @GetMapping("/members/{id}/reservations")
+    @GetMapping("/members/{memberId}/reservations")
     @CheckRole({"USER","ADMIN"})
-    public ResponseEntity<?> getReservationsByMemberId(@PathVariable Long id) {
-        List<ReservationDTO> reservations = reservationService.getReservationsByMemberId(id);
+    public ResponseEntity<?> getReservationsByMemberId(@PathVariable Long memberId) {
+        List<ReservationDTO> reservations = reservationService.getReservationsByMemberId(memberId);
         return ResponseEntity.ok(reservations);
     }
 

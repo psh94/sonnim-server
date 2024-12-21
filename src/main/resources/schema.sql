@@ -1,9 +1,10 @@
 START TRANSACTION;
 
 -- Delete existing data from tables
-DELETE FROM payments;
 DELETE FROM reservation_room_inventories;
 DELETE FROM reservations;
+DELETE FROM reviews;
+DELETE FROM payments;
 DELETE FROM room_inventories;
 DELETE FROM rooms;
 DELETE FROM guesthouses;
