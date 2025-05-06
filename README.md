@@ -42,6 +42,9 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 - Github Actions를 이용하여 CI/CD 구축
 - Docker, AWS ECR을 이용한 무중단 배포 구현
 
+## 📖 개선사항(아쉬운 점)
+- 설계 당시 N+1 문제에 대해 충분히 고려하지 못함
+
 ## 📖 API
 
 **MEMBER**
