@@ -39,8 +39,8 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 - JWT Refresh 방식을 이용하여 보안 강화
 - EC2상의 Redis Session에 Refresh Token 저장
 - 결제 시, 날짜별 재고 관리
-- Github Actions를 이용하여 CI/CD 구축
-- Docker, AWS ECR을 이용한 무중단 배포 구현
+- GitHub Actions, Docker, AWS ECR을 활용하여 CI/CD 파이프라인을 구축
+- AWS EC2 환경에서 무중단 배포를 구현하여 서비스 중단 없이 신규 버전을 적용
 
 ## 📖 개선사항(아쉬운 점)
 - 설계 당시 N+1 문제에 대해 충분히 고려하지 못함
