@@ -44,6 +44,7 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 
 ## 📖 개선사항(아쉬운 점)
 - 설계 당시 N+1 문제에 대해 충분히 고려하지 못함
+https://github.com/psh94/sonnim-server/wiki/N-%EF%BC%8B-1-%EB%AC%B8%EC%A0%9C-%EA%B0%9C%EC%84%A0%EC%82%AC%ED%95%AD
 
 ## 📖 API
 
