@@ -44,8 +44,10 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 
 ## 📖 개선사항(아쉬운 점)
 - 설계 당시 N+1 문제에 대해 충분히 고려하지 못함
+- findAll()을 피하고 findById()와 같은 메서드를 활용하여 N+1 문제를 피하였으나 다른 선택사항을 충분히 고려하지 못했음
+  
+(WIKI : https://github.com/psh94/sonnim-server/wiki/N%EF%BC%8B1-%EB%AC%B8%EC%A0%9C-%EA%B0%9C%EC%84%A0%EC%82%AC%ED%95%AD)
 
-https://github.com/psh94/sonnim-server/wiki/N-%EF%BC%8B-1-%EB%AC%B8%EC%A0%9C-%EA%B0%9C%EC%84%A0%EC%82%AC%ED%95%AD
 
 ## 📖 API
 
