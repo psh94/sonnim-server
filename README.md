@@ -42,7 +42,7 @@ https://www.figma.com/proto/0c7UO75qnPNAdkJml748bZ/Untitled?node-id=0-1&t=xVOZMg
 - GitHub Actions, Docker, AWS ECR을 활용하여 CI/CD 파이프라인을 구축
 - AWS EC2 환경에서 무중단 배포를 구현하여 서비스 중단 없이 신규 버전을 적용
 
-## 📖 개선사항(아쉬운 점)
+## 📖 아쉬운 점
 - N+1 문제를 방지하기 위해 findAll()을 지양하고 findById()와 같은 단건 조회 메서드를 사용하여 N+1 문제를 회피하였으나, Fetch Join이나 DTO 직접 조회 등 다른 최적화 방안을 충분히 고려하지 못한 점이 다소 아쉬웠음
   
 (WIKI : https://github.com/psh94/sonnim-server/wiki/N%EF%BC%8B1-%EB%AC%B8%EC%A0%9C-%EA%B0%9C%EC%84%A0%EC%82%AC%ED%95%AD)
