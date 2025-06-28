@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.time.Duration;
 import java.util.Date;
 
 @Component
@@ -63,5 +64,9 @@ public class JwtUtil {
 
     public String extractUsername(String token) {
         return getUserIdFromToken(token).toString();
+    }
+
+    public Duration getRefreshTokenDuration() {
+        return Duration.ofMillis(refreshTokenValidity);
     }
 }

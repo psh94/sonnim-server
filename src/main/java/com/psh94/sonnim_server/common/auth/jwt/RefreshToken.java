@@ -1,11 +1,10 @@
 package com.psh94.sonnim_server.common.auth.jwt;
 
-import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
-import java.util.UUID;
 
 
 @Getter
@@ -14,17 +13,12 @@ import java.util.UUID;
 public class RefreshToken {
 
     @Id
-    private String id;
-
-    @Indexed
+    private String token;
     private Long userId;
 
-    @Indexed
-    private String token;
 
     @Builder
     public RefreshToken(Long userId, String token) {
-        this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.token = token;
     }
